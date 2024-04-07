@@ -4,8 +4,8 @@ title: "ISSS608 Visual Analytics and Applications"
 
 Hey there welcome to Zi Jun's Visual Analytics portfolio page.
 
-From here I aim to document my coursework and projects for this module.
+The aim of this page is to document all my coursework and projects for this module.
 
-As of now everything is still a work in progress!
+As of now this page is still a work in progress!
 
-![Random stock image...](images/13333499_7332.jpg){fig-align="center"}
+![Random stock image....](images/13333499_7332.jpg){fig-align="center" width="572"}

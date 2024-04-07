@@ -2,4 +2,12 @@
 title: "Hands-on Exercise 1"
 ---
 
-ggplot
+ggplot (testing)
+
+item 1
+
+item 2
+
+..
+
+...
