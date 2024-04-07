@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ISSS608-VAA",
+    "title": "ISSS608 Visual Analytics and Applications",
     "section": "",
-    "text": "Hey there! Welcome to my Visual Analytics and Applications website!"
+    "text": "Hey there welcome to Zi Jun’s Visual Analytics portfolio page.\nFrom here I aim to document my coursework and projects for this module.\nAs of now everything is still a work in progress!\n\n\n\nRandom stock image…"
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "ggplot"
   }
 ]

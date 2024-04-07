@@ -1,5 +1,11 @@
 ---
-title: "ISSS608-VAA"
+title: "ISSS608 Visual Analytics and Applications"
 ---
 
-Hey there! Welcome to my Visual Analytics and Applications website!
+Hey there welcome to Zi Jun's Visual Analytics portfolio page.
+
+From here I aim to document my coursework and projects for this module.
+
+As of now everything is still a work in progress!
+
+![Random stock image...](images/13333499_7332.jpg){fig-align="center"}
