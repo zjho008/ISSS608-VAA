@@ -10,7 +10,7 @@ website:
           - text: "Hands-on Exercise 1"
             href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
           - text: "Hands-on Exercise 2"
-            href: "Hands-on_Ex/Hands-on_Ex02"
+            href: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html"
           - text: "Hands-on Exercise 3"
             href: "Hands-on_Ex/Hands-on_Ex03"
       - text: "In-class Exercise"
@@ -32,7 +32,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: zephyr
     css: styles.css
     toc: true
 
