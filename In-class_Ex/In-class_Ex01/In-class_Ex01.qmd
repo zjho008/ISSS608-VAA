@@ -20,8 +20,7 @@ pacman::p_load(tidyverse)
 
 ## Comparison of functions for reading csv files.
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## `read_csv()`
 
 ```{r}
@@ -32,7 +31,7 @@ realis <- read_csv("data/realis2019.csv")
 class(realis)
 ```
 
-For the `read_csv()` function it reads the file into a tibble object 
+For the `read_csv()` function it reads the file into a tibble object
 
 ## `read.csv()`
 
@@ -43,8 +42,8 @@ realis.csv <- read.csv("data/realis2019.csv")
 ```{r}
 class(realis.csv)
 ```
-For the `read.csv()` it reads the file into a data frame object.Any special characters or spaces in between will be replaced with " . "
 
+For the `read.csv()` it reads the file into a data frame object.Any special characters or spaces in between will be replaced with " . "
 :::
 
 ## ggplot - Histogram

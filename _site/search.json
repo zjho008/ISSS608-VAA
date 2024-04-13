@@ -7,6 +7,20 @@
     "text": "Hey there welcome to Zi Jun’s Visual Analytics and Applications portfolio page. This website is to document and showcase my coursework and projects for this module.\nAs of now this page is still a work in progress!\n\n\n\nVisual Analytics…."
   },
   {
+    "objectID": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
+    "href": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
+    "title": "Hands-on Exercise 2",
+    "section": "",
+    "text": "In Progress"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
     "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
     "title": "Hands-on Exercise 1",
@@ -91,17 +105,31 @@
     "text": "4.8 References\n\nKam, T. S. (2024). A Layered Grammar of Graphics: ggplot2 methods.\nHadley Wickham (2023) ggplot2: Elegant Graphics for Data Analysis. Online 3rd edition.\nWinston Chang (2013) R Graphics Cookbook 2nd edition. Online version.\nHealy, Kieran (2019) Data Visualization: A practical introduction. Online version\nLearning ggplot2 on Paper – Components\nLearning ggplot2 on Paper – Layer\nLearning ggplot2 on Paper – Scale"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html",
+    "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html",
+    "title": "In-class Exercise 1",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "In the code chunk below, p_load() of pacman package is used to load the tidyverse family of packages.\n\npacman::p_load(tidyverse)"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
-    "href": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
-    "title": "Hands-on Exercise 2",
+    "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#loading-r-packages",
+    "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#loading-r-packages",
+    "title": "In-class Exercise 1",
     "section": "",
-    "text": "In Progress"
+    "text": "In the code chunk below, p_load() of pacman package is used to load the tidyverse family of packages.\n\npacman::p_load(tidyverse)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#comparison-of-functions-for-reading-csv-files.",
+    "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#comparison-of-functions-for-reading-csv-files.",
+    "title": "In-class Exercise 1",
+    "section": "Comparison of functions for reading csv files.",
+    "text": "Comparison of functions for reading csv files.\n\nread_csv()read.csv()\n\n\n\nrealis &lt;- read_csv(\"data/realis2019.csv\")\n\n\nclass(realis)\n\n[1] \"spec_tbl_df\" \"tbl_df\"      \"tbl\"         \"data.frame\" \n\n\nFor the read_csv() function it reads the file into a tibble object\n\n\n\nrealis.csv &lt;- read.csv(\"data/realis2019.csv\")\n\n\nclass(realis.csv)\n\n[1] \"data.frame\"\n\n\nFor the read.csv() it reads the file into a data frame object.Any special characters or spaces in between will be replaced with ” . ”"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#ggplot---histogram",
+    "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#ggplot---histogram",
+    "title": "In-class Exercise 1",
+    "section": "ggplot - Histogram",
+    "text": "ggplot - Histogram\n\nggplot(data = realis,\n       aes(x = `Unit Price ($ psm)`)) +\n  geom_histogram()"
   }
 ]
