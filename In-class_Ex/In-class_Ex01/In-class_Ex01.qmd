@@ -1,0 +1,56 @@
+---
+title: "In-class Exercise 1"
+author: "Ho Zi Jun"
+date: "April 13, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Loading R packages
+
+In the code chunk below, [`p_load()`](https://www.geeksforgeeks.org/p_load-function-in-r/) of [pacman](https://trinker.github.io/pacman_dev/) package is used to load the tidyverse family of packages.
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+## Comparison of functions for reading csv files.
+
+::: {.panel-tabset}
+
+## `read_csv()`
+
+```{r}
+realis <- read_csv("data/realis2019.csv")
+```
+
+```{r}
+class(realis)
+```
+
+For the `read_csv()` function it reads the file into a tibble object 
+
+## `read.csv()`
+
+```{r}
+realis.csv <- read.csv("data/realis2019.csv")
+```
+
+```{r}
+class(realis.csv)
+```
+For the `read.csv()` it reads the file into a data frame object.Any special characters or spaces in between will be replaced with " . "
+
+:::
+
+## ggplot - Histogram
+
+```{r}
+ggplot(data = realis,
+       aes(x = `Unit Price ($ psm)`)) +
+  geom_histogram()
+```
