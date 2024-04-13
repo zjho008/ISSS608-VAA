@@ -16,7 +16,7 @@ website:
       - text: "In-class Exercise"
         menu: 
           - text: "In-class Exercise 1"
-            href: "In-class_Ex/In-class_Ex01"
+            href: "In-class_Ex/In-class_Ex01/In-class_Ex01.html"
           - text: "In-class Exercise 2"
             href: "In-class_Ex/In-class_Ex02"
       - text: "Take-home Exercise"
@@ -37,4 +37,3 @@ format:
     toc: true
 
 editor: visual
-
