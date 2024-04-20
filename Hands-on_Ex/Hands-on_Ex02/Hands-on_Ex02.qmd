@@ -443,7 +443,7 @@ p1 + p2
 We can plot more complex composite by using appropriate operators. For example, the composite figure below is plotted by using the following:
 
 -   “/” operator to stack two ggplot2 graphs,
--   “|” operator to place the plots beside each other,
+-   “\|” operator to place the plots beside each other,
 -   “()” operator the define the sequence of the plotting.
 
 ::: panel-tabset
@@ -524,7 +524,8 @@ Figure below is created by combining patchwork and `theme_economist()` of ggthem
 ```{r}
 #| echo: false
 patchwork <- (p1 / p2) | p3
-patchwork & theme_economist()
+patchwork & theme_economist() &
+  theme(plot.title = element_text(size=9))
 ```
 
 ## The code

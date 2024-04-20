@@ -1,9 +1,19 @@
 ---
 title: "ISSS608 Visual Analytics and Applications"
+listing:
+  type: default
+  max-items: 6
+  contents:
+    - "In-class_Ex/*/*.qmd"
+    - "Hands-on_Ex/*/*.qmd"
+    - "Take-home_Ex/*/*.qmd"
+    - "Projects"
+  sort: 
+    - "date desc"
 ---
 
-Hey there welcome to Zi Jun's **Visual Analytics and Applications** portfolio page. This website is to document and showcase my coursework and projects for this module.
+Hey there! Welcome to my **Visual Analytics and Applications** homepage! From here, you can see how I utilize various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
 
-As of now this page is still a work in progress!
+![](images/Screenshot%202024-04-18%20155823.png){fig-align="center" width="785" height="370"}
 
-![Visual Analytics....](images/13333499_7332.jpg){fig-align="center" width="572"}
+#### **Feature of My Latest Works:**

@@ -2,8 +2,10 @@
 title: "About"
 ---
 
-About this site
+Welcome to my **Visual Analytics and Applications** Netlify page. This page aims to document and showcase my coursework and projects for this module.
 
-```{r}
-1 + 1
-```
+You may reach me via email or we can connect with each other on LinkedIn!
+
+![](images/clipboard-622340585.png)
+
+***Thank you!***
