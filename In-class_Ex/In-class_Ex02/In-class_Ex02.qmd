@@ -1,0 +1,151 @@
+---
+title: "In-class Exercise 2"
+author: "Ho Zi Jun"
+date: "April 20, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+# Getting Started
+
+## Loading R Packages
+
+::: panel-tabset
+## The task
+
+```{r}
+pacman::p_load(ggthemes,tidyverse,
+               ggdist, ggridges, colorspace)
+```
+
+## The code
+
+:::
+
+Before we move on to the next step, it is always a good practice to visit.
+
+## Importing the data
+
+::: panel-tabset
+## The task
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+## The code
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+:::
+
+# Visualising Distribution
+
+## Histogram
+
+::: panel-tabset
+
+## The task
+```{r}
+ggplot(data=exam_data, 
+             aes(x = ENGLISH)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="lightblue") +
+  coord_cartesian(xlim=c(0,100)) +
+  ggtitle("Distribution of English scores")
+```
+
+## The code
+
+```{r}
+ggplot(data=exam_data, 
+             aes(x = ENGLISH)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="lightblue") +
+  coord_cartesian(xlim=c(0,100)) +
+  ggtitle("Distribution of English scores")
+```
+
+:::
+
+::: panel-tabset
+
+## The task
+
+```{r}
+ggplot(exam_df,
+       aes(x = ENGLISH)) +
+  geom_density(
+    colorr = "#1696d2",
+    adjust = .65,
+    alpha = .6
+  )
+```
+## The code
+
+```{r}
+ggplot(exam_df,
+       aes(x = ENGLISH)) +
+  geom_density(
+    colorr = "#1696d2",
+    adjust = .65,
+    alpha = .6
+  )
+```
+
+:::
+
+# The alternative design
+
+::: panel-tabset
+
+## The task
+
+```{r}
+
+```
+## The code
+
+```{r}
+median_eng <- median(exam_df$ENGLISH)
+mean_eng <- mean (exam_df$ENGLISH)
+std_eng <- sd(exam_df$ENGLISH)
+
+ggplot(exam_df,
+       aes(x = ENGLISH)) +
+  geom_density(
+    color = "#1696d2",
+    adjust = .65,
+    alpha = .6) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean_eng,
+                sd = std-eng),
+    col = "grey30",
+    size = .8) +
+  geom_vline(
+    aex(xintercept = mean_eng),
+    color="#4d5887",
+    linewidth =.6,
+    linetype = "dashed") +
+  annotate(geom = "text",
+           x =mean_eng - 8,
+           y = 0.04,
+           label = paste0("Mean ENGLISH: ",
+                          round((mean_eng), 2)),
+           color = "#4d5887") +
+  geom_vline(
+    aes(xintercept = median_eng),
+
+```
+
+:::

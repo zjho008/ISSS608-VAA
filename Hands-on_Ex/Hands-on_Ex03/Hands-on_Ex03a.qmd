@@ -565,7 +565,7 @@ The data_id aesthetic is critical to link observations between plots and the too
 
 ## [3.6]{style="color:grey"} Interactive Data Visualisation - plotly methods!
 
-Plotly’s R graphing library creates interactive web graphics from **ggplot2** graphs and/or a custom interface to the (MIT-licensed) JavaScript library **[plotly.js](https://plotly.com/javascript/)** inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
+Plotly’s R graphing library creates interactive web graphics from **ggplot2** graphs and/or a custom interface to the (MIT-licensed) JavaScript library [**plotly.js**](https://plotly.com/javascript/) inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
 
 ![Overview of the conversion and rendering process](ploty.jpg)
 
@@ -632,6 +632,7 @@ plot_ly(data = exam_data,
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 p <- ggplot(data=exam_data,
@@ -645,6 +646,7 @@ ggplotly(p)
 ```
 
 ## The code chunk
+
 ```{r}
 #| eval: false
 p <- ggplot(data=exam_data,
@@ -656,6 +658,7 @@ p <- ggplot(data=exam_data,
 
 ggplotly(p)
 ```
+
 Notice that the only extra line you need to include in the code chunk is *ggplotly()*.
 :::
 

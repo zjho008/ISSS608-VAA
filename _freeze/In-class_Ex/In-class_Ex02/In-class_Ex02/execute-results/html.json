@@ -1,0 +1,14 @@
+{
+  "hash": "83d466a33e18f05cc29730590d95a57e",
+  "result": {
+    "markdown": "---\ntitle: \"In-class Exercise 2\"\nauthor: \"Ho Zi Jun\"\ndate: \"April 20, 2024\"\ndate-modified: \"last-modified\"\nexecute:\n  eval: true\n  echo: true\n  warning: false\n  freeze: true\n---\n\n\n# Getting Started\n\n## Loading R Packages\n\n::: panel-tabset\n## The task\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(ggthemes,tidyverse,\n               ggdist, ggridges, colorspace)\n```\n:::\n\n\n## The code\n\n:::\n\nBefore we move on to the next step, it is always a good practice to visit.\n\n## Importing the data\n\n::: panel-tabset\n## The task\n\n\n::: {.cell}\n\n```{.r .cell-code}\nexam_data <- read_csv(\"data/Exam_data.csv\")\n```\n:::\n\n\n## The code\n\n\n::: {.cell}\n\n```{.r .cell-code}\nexam_data <- read_csv(\"data/Exam_data.csv\")\n```\n:::\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
