@@ -12,8 +12,8 @@ listing:
     - "date desc"
 ---
 
-Hey there! Welcome to my **Visual Analytics and Applications** homepage! From here, you can see how I utilize various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
+Hey there! Welcome to my **Visual Analytics and Applications** homepage! From here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
 
 ![](images/Screenshot%202024-04-18%20155823.png)
 
-#### **Feature of My Latest Works:**
+#### **A Feature of My Latest Works:**
