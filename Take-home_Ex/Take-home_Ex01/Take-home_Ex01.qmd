@@ -122,6 +122,7 @@ ggplot(data=private_property_data,
                  color="grey30")
 ```
 **Observations**: The overlaid histogram illustrates the unit price per square meter ($ PSM) distribution across different property types in Singapore's private residential market. Apartments and condominiums are predominant, with a high frequency of lower-priced units, indicative of a strong market presence and potential affordability. The executive condominiums show fewer transactions but at a more moderate price range, suggesting a niche market. Detached houses, while less frequent, have transactions across a wider price range, signaling diverse offerings from affordable to luxury segments. Semi-detached and terrace houses exhibit a similar pattern, though terrace houses skew towards lower prices, possibly reflecting market preference for affordability.
+
 ## Property Type
 ```{r}
 #| code-fold: true
@@ -160,7 +161,7 @@ ggplot(q1_24,
   theme_ridges()
 ```
 
-**Observations**: Based on the plot, it can be observed that the various property types generally resemble a normal distribution. With reference from the quartile lines, the Unit Price Per Square Metre ($PSM) for *Apartments* tend to be higher than that for the other remaining five property types; while the ($ PSM) of *Executive Condominiums (ECs)* tend to be lower than the other property types. This corresponds to the fact that ECs while built by private developers with the facilities of a Condominium are sold as public housing via the Housing Development Board (HDB) which receive some government subsidies. ECs are also catered to middle-income Singaporeans / Singapore Permanent Residents who do not qualify for a HDB flat due to the income ceilling cap but find private condominiums out of their budget.
+**Observations**: Based on the plot, it can be observed that the various property types generally resemble a normal distribution. With reference from the quartile lines, the Unit Price Per Square Metre `($ PSM)` for *Apartments* tend to be higher than that for the other remaining five property types; while the ($ PSM) of *Executive Condominiums (ECs)* tend to be lower than the other property types. This corresponds to the fact that ECs while built by private developers with the facilities of a Condominium are sold as public housing via the Housing Development Board (HDB) which receive some government subsidies. ECs are also catered to middle-income Singaporeans / Singapore Permanent Residents who do not qualify for a HDB flat due to the income ceilling cap but find private condominiums out of their budget.
 
 ### 3.3 Comparing Planning Region and Unit Price ($ PSM) (1st quarter of 2024)
 

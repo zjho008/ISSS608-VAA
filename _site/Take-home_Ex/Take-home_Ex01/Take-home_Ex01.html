@@ -96,8 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -417,7 +415,7 @@ $ `Planning Area`               &lt;chr&gt; "Bukit Merah", "Bedok", "Yishun", "Y
 <section id="distribution-of-private-residential-market-1st-quarter-of-2023---1st-quarter-of-2024" class="level3">
 <h3 class="anchored" data-anchor-id="distribution-of-private-residential-market-1st-quarter-of-2023---1st-quarter-of-2024">3.1 Distribution of Private Residential Market (1st quarter of 2023 - 1st quarter of 2024)</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Property distribution vs ($PSM)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Property Type with <code>geom_density()</code></a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Property distribution vs ($PSM)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Property Type</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Property Type with <code>geom_density()</code></a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
@@ -433,7 +431,9 @@ $ `Planning Area`               &lt;chr&gt; "Bukit Merah", "Bedok", "Yishun", "Y
 <p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Observations</strong>: The overlaid histogram illustrates the unit price per square meter ($ PSM) distribution across different property types in Singapore’s private residential market. Apartments and condominiums are predominant, with a high frequency of lower-priced units, indicative of a strong market presence and potential affordability. The executive condominiums show fewer transactions but at a more moderate price range, suggesting a niche market. Detached houses, while less frequent, have transactions across a wider price range, signaling diverse offerings from affordable to luxury segments. Semi-detached and terrace houses exhibit a similar pattern, though terrace houses skew towards lower prices, possibly reflecting market preference for affordability. ## Property Type</p>
+<p><strong>Observations</strong>: The overlaid histogram illustrates the unit price per square meter ($ PSM) distribution across different property types in Singapore’s private residential market. Apartments and condominiums are predominant, with a high frequency of lower-priced units, indicative of a strong market presence and potential affordability. The executive condominiums show fewer transactions but at a more moderate price range, suggesting a niche market. Detached houses, while less frequent, have transactions across a wider price range, signaling diverse offerings from affordable to luxury segments. Semi-detached and terrace houses exhibit a similar pattern, though terrace houses skew towards lower prices, possibly reflecting market preference for affordability.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
 <details>
 <summary>Show the code</summary>
@@ -447,7 +447,7 @@ $ `Planning Area`               &lt;chr&gt; "Bukit Merah", "Bedok", "Yishun", "Y
 </div>
 </div>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
 <details>
 <summary>Show the code</summary>
@@ -484,7 +484,7 @@ $ `Planning Area`               &lt;chr&gt; "Bukit Merah", "Bedok", "Yishun", "Y
 <p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Observations</strong>: Based on the plot, it can be observed that the various property types generally resemble a normal distribution. With reference from the quartile lines, the Unit Price Per Square Metre (<span class="math inline">\(PSM) for *Apartments* tend to be higher than that for the other remaining five property types; while the (\)</span> PSM) of <em>Executive Condominiums (ECs)</em> tend to be lower than the other property types. This corresponds to the fact that ECs while built by private developers with the facilities of a Condominium are sold as public housing via the Housing Development Board (HDB) which receive some government subsidies. ECs are also catered to middle-income Singaporeans / Singapore Permanent Residents who do not qualify for a HDB flat due to the income ceilling cap but find private condominiums out of their budget.</p>
+<p><strong>Observations</strong>: Based on the plot, it can be observed that the various property types generally resemble a normal distribution. With reference from the quartile lines, the Unit Price Per Square Metre <code>($ PSM)</code> for <em>Apartments</em> tend to be higher than that for the other remaining five property types; while the ($ PSM) of <em>Executive Condominiums (ECs)</em> tend to be lower than the other property types. This corresponds to the fact that ECs while built by private developers with the facilities of a Condominium are sold as public housing via the Housing Development Board (HDB) which receive some government subsidies. ECs are also catered to middle-income Singaporeans / Singapore Permanent Residents who do not qualify for a HDB flat due to the income ceilling cap but find private condominiums out of their budget.</p>
 </section>
 <section id="comparing-planning-region-and-unit-price-psm-1st-quarter-of-2024" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-planning-region-and-unit-price-psm-1st-quarter-of-2024">3.3 Comparing Planning Region and Unit Price ($ PSM) (1st quarter of 2024)</h3>
