@@ -52,9 +52,9 @@ Figure below is a ridgelines plot showing the distribution of English score by c
 ![Ridgelines plot: English score by class](Ridgelinesplot.png)
 
 ::: callout-note
--  Ridgeline plots make sense when the number of group to represent is medium to high, and thus a classic window separation would take to much space. Indeed, the fact that groups overlap each other allows to use space more efficiently. If you have less than 5 groups, dealing with other distribution plots is probably better.
+-   Ridgeline plots make sense when the number of group to represent is medium to high, and thus a classic window separation would take to much space. Indeed, the fact that groups overlap each other allows to use space more efficiently. If you have less than 5 groups, dealing with other distribution plots is probably better.
 
--  It works well when there is a clear pattern in the result, like if there is an obvious ranking in groups. Otherwise groups will tend to overlap each other, leading to a messy plot not providing any insight.
+-   It works well when there is a clear pattern in the result, like if there is an obvious ranking in groups. Otherwise groups will tend to overlap each other, leading to a messy plot not providing any insight.
 :::
 
 ### [9.3.1]{style="colour:grey"} Plotting ridgeline graph: ggridges method
@@ -67,6 +67,7 @@ The ridgeline plot below is plotted by using `geom_density_ridges()`.
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -86,7 +87,9 @@ ggplot(exam,
   scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
   theme_ridges()
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -114,6 +117,7 @@ Sometimes we would like to have the area under a ridgeline not filled with a sin
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -132,7 +136,9 @@ ggplot(exam,
   scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
   theme_ridges()
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -161,6 +167,7 @@ Figure below is plotted by mapping the probabilities calculated by using `stat(e
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -173,7 +180,9 @@ ggplot(exam,
                        direction = -1) +
   theme_ridges()
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -187,6 +196,7 @@ ggplot(exam,
   theme_ridges()
 ```
 :::
+
 ::: callout-important
 It is important include the argument `calc_ecdf = TRUE in stat_density_ridges()`.
 :::
@@ -197,6 +207,7 @@ By using [geom_density_ridges_gradient()](), we can colour the ridgeline plot by
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -212,7 +223,9 @@ ggplot(exam,
   scale_fill_viridis_d(name = "Quartiles") +
   theme_ridges()
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -229,10 +242,12 @@ ggplot(exam,
   theme_ridges()
 ```
 :::
+
 Instead of using number to define the quantiles, we can also specify quantiles by cut points such as by 2.5% and 97.5% tails to colour the ridgeline plot as shown in the figure below.
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -254,6 +269,7 @@ ggplot(exam,
 ```
 
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -289,6 +305,7 @@ This produces a Half Eye visualization, which contains a half-density and a slab
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -301,6 +318,7 @@ ggplot(exam,
 ```
 
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -311,8 +329,10 @@ ggplot(exam,
                .width = 0,
                point_colour = NA)
 ```
+
 ::: callout-tip
 ## Things to learn from the code chunk above
+
 We remove the slab interval by setting .width = 0 and point_colour = NA.
 :::
 :::
@@ -323,6 +343,7 @@ Next, we will add the second geometry layer using [geom_boxplot()](https://ggplo
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -335,7 +356,9 @@ ggplot(exam,
   geom_boxplot(width = .20,
                outlier.shape = NA)
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -356,6 +379,7 @@ Next, we will add the third geometry layer using [stat_dots()](https://mjskay.gi
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -374,6 +398,7 @@ ggplot(exam,
 ```
 
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -398,6 +423,7 @@ Lastly, [coord_flip()](https://ggplot2.tidyverse.org/reference/coord_flip.html) 
 
 ::: panel-tabset
 ## The plot
+
 ```{r}
 #| echo: false
 ggplot(exam,
@@ -416,7 +442,9 @@ ggplot(exam,
   coord_flip() +
   theme_economist()
 ```
+
 ## The code chunk
+
 ```{r}
 #| eval: false
 ggplot(exam,
@@ -439,8 +467,8 @@ ggplot(exam,
 
 ## [9.5]{style="colour:grey"} References
 
--  Kam, T.S (2024). [9 - Visualising Distribution](https://r4va.netlify.app/chap09)
--  [Introducing Ridgeline Plots (formerly Joyplots)](https://blog.revolutionanalytics.com/2017/07/joyplots.html)
--  Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) especially Chapter [6](https://clauswilke.com/dataviz/visualizing-amounts.html), [7](https://clauswilke.com/dataviz/histograms-density-plots.html), [8](https://clauswilke.com/dataviz/ecdf-qq.html), [9](https://clauswilke.com/dataviz/boxplots-violins.html) and [10](https://clauswilke.com/dataviz/visualizing-proportions.html).
--  Allen M, Poggiali D, Whitaker K et al. [“Raincloud plots: a multi-platform tool for robust data. visualization”](https://wellcomeopenresearch.org/articles/4-63) [version 2; peer review: 2 approved]. Welcome Open Res 2021, pp. 4:63.
--  [Dots + interval stats and geoms](https://mjskay.github.io/ggdist/articles/dotsinterval.html)
+-   Kam, T.S (2024). [9 - Visualising Distribution](https://r4va.netlify.app/chap09)
+-   [Introducing Ridgeline Plots (formerly Joyplots)](https://blog.revolutionanalytics.com/2017/07/joyplots.html)
+-   Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) especially Chapter [6](https://clauswilke.com/dataviz/visualizing-amounts.html), [7](https://clauswilke.com/dataviz/histograms-density-plots.html), [8](https://clauswilke.com/dataviz/ecdf-qq.html), [9](https://clauswilke.com/dataviz/boxplots-violins.html) and [10](https://clauswilke.com/dataviz/visualizing-proportions.html).
+-   Allen M, Poggiali D, Whitaker K et al. [“Raincloud plots: a multi-platform tool for robust data. visualization”](https://wellcomeopenresearch.org/articles/4-63) \[version 2; peer review: 2 approved\]. Welcome Open Res 2021, pp. 4:63.
+-   [Dots + interval stats and geoms](https://mjskay.github.io/ggdist/articles/dotsinterval.html)
