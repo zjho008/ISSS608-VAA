@@ -660,11 +660,11 @@ The processes for the data visualisation makeover in this take-home exercise ill
 -   To check the data
 
     -   It goes without saying that data is the core element of any chart or graph. If the data is unreliable, the graph will also be unreliable. Therefore, it's crucial to ensure your data is accurate. Begin by creating straightforward graphs to identify any outliers or unusual spikes. Always double-check anything that looks off. You may find a surprising number of data entry errors in the spreadsheets you receive.
-    
+
 -   Choosing of colours
 
     -   Effective use of color can significantly enhance and clarify a presentation, while poor use of color can lead to confusion and obscurity. Although color adds an aesthetic quality, its primary role in displaying information is functional. The key is to consider what information needs to be conveyed and to determine if and how color can improve the communication of that information.
-    
+
 -   Highlighting what's important
 
     -   To effectively communicate a message, it's essential to direct your audience's attention to the data under analysis. Start with a title that captures the essence of your insight. Then, emphasize your data visually while maintaining other data in a subdued manner in the background, providing context and enabling comparisons.
@@ -682,6 +682,5 @@ The processes for the data visualisation makeover in this take-home exercise ill
 -   [Data Visualization: Clarity or Aesthetics?](https://isss608-ay2023-24apr.netlify.app/lesson/lesson02/lesson02-designing%20graphs%20to%20enlighten#/data-visualization-clarity-or-aesthetics)
 
 -   [Dos and don’ts of data visualisation — European Environment Agency](https://www.eea.europa.eu/data-and-maps/daviz/learn-more/chart-dos-and-donts)
-
 
 -   [Choosing Colors for Data Visualization](https://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf)
