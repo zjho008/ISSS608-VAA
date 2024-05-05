@@ -60,9 +60,9 @@ Below shows a typical code chunk to plot an interactive statistical graph by usi
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-p <- ggplot(data=exam_data,
+p <- ggplot(data=exam_data,   # (`p <-)` save as object
             aes(x=MATHS)) +
-  geom_dotplot_interactive(
+  geom_dotplot_interactive( # New aesthetic function added in.
     aes(tooltip=ID),
     stackgroups=TRUE,
     binwidth=1,
@@ -70,8 +70,8 @@ p <- ggplot(data=exam_data,
   scale_y_continuous(NULL,
                      breaks=NULL)
 girafe(
-  ggobj=p,
-  width_svg=6,
+  ggobj=p,           # passing ggplot into girafe()
+  width_svg=6,       # More interactive & dynamic
   height_svg=6*0.618
 )
 ```
@@ -89,7 +89,7 @@ The content of the tooltip can be customised by including a list object as shown
 #| code-summary: "Show the code"
 exam_data$tooltip <- c(paste0(     
   "Name = ", exam_data$ID,         
-  "\n Class = ", exam_data$CLASS)) 
+  "\n Class = ", exam_data$CLASS))
 
 p <- ggplot(data=exam_data, 
        aes(x = MATHS)) +
@@ -435,8 +435,8 @@ The code chunk below shown an example of `onclick`.
 ```{r}
 #| eval: false
 exam_data$onclick <- sprintf("window.open(\"%s%s\")",
-"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school",
-as.character(exam_data$ID))
+"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school", #E.g. to provide a hyperlink to another webpage
+as.character(exam_data$ID))  #this code inserts the student ID in the hyperlink
 
 p <- ggplot(data=exam_data,
             aes(x = MATHS)) +
@@ -510,7 +510,7 @@ p2 <- ggplot(data=exam_data,
   scale_y_continuous(NULL,               
                      breaks = NULL)
 
-girafe(code = print(p1 + p2), 
+girafe(code = print(p1 + p2),  # using `patchwork::` to link both interactive views together; there has to be a same for control for variables in order for the interactivity to work.
        width_svg = 6,
        height_svg = 3,
        options = list(
@@ -656,7 +656,7 @@ p <- ggplot(data=exam_data,
   coord_cartesian(xlim=c(0,100),
                   ylim=c(0,100))
 
-ggplotly(p)
+ggplotly(p)  # write in ggplot and to wrap with ggplotly()
 ```
 
 Notice that the only extra line you need to include in the code chunk is *ggplotly()*.
@@ -699,7 +699,7 @@ Click on a data point of one of the scatterplot and see how the corresponding po
 
 ```{r}
 #| eval: false
-d <- highlight_key(exam_data)
+d <- highlight_key(exam_data) # consuming data after the highlight key; hence both p1 & p2 point to the highlight key in the subsequent code chunk below
 p1 <- ggplot(data=d,
              aes(x = MATHS,
                  y = ENGLISH)) +

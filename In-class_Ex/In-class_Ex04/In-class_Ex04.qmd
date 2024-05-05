@@ -1,0 +1,260 @@
+---
+title: "In-class Exercise 4"
+author: "Ho Zi Jun"
+date: "May 04, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## [4.1]{style="color:grey"} Loading the packages and data
+
+::: panel-tabset
+## Loading packages
+
+```{r}
+pacman::p_load(ggstatsplot, tidyverse)
+```
+
+## Importing data
+
+```{r}
+exam <- read_csv("data/Exam_data.csv")
+```
+:::
+
+## [4.2]{style="color:grey"} One-sample test: *gghistostats()* method
+
+In the code chunk below, [*gghistostats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html) is used to to build a visual of one-sample test on English scores.
+
+From the code chunks below there will be changes made to `type` from `parametric` to `non-parametric (np)`
+
+::: panel-tabset
+
+## Parametric
+```{r}
+# for reproducibility
+set.seed(1234)
+```
+
+```{r}
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "parametric",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = FALSE,
+  normal.cruve.args = list(linewidth
+=2),
+  xlab = "English scores"
+)
+```
+
+From the plot it can be observed that a t-test is carried out.
+
+## Non Parametric (i)
+```{r}
+set.seed(1234)
+```
+
+```{r}
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "np",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = FALSE,
+  normal.cruve.args = list(linewidth
+=2),
+  xlab = "English scores"
+)
+```
+
+When `type = "np"` a Wilcoxon test is carried out - statistical test method automatically changed; results kept as a tubular dataframe keeping it as a line of text.
+
+## Non Parametric (ii)
+```{r}
+set.seed(1234)
+```
+
+```{r}
+p <- gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "np",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = FALSE,
+  normal.cruve.args = list(linewidth
+=2),
+  xlab = "English scores"
+)
+```
+
+::: callout-note
+Changing/saving code chunk above as an object to enable us to extract statistical test results using `extract_stats()` function
+:::
+```{r}
+extract_stats(p)
+```
+:::
+
+## [4.3]{style="color:grey"} One-sample test: *gghistostats()* method (Varying `type = robust`)
+
+```{r}
+set.seed(1234)
+```
+
+```{r}
+  gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "robust",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = FALSE,
+  normal.cruve.args = list(linewidth
+=2),
+  xlab = "English scores"
+)
+```
+
+For `robust` (for **trimmed mean**) outliers are trimmed and the bootstrapped method is used to calculate test statistics.
+
+## [4.4]{style="color:grey"} One-sample test: *gghistostats()* method (Varying `type = bayes`)
+
+```{r}
+set.seed(1234)
+```
+
+```{r}
+  gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = FALSE,
+  normal.cruve.args = list(linewidth = 0.5),
+  xlab = "English scores"
+)
+```
+-  by default `normal.curve` is FALSE - Argument can be toggled to TRUE - A logical value that decides whether to super-impose a normal curve.
+
+**Default information**: - statistical details - Bayes Factor - sample sizes - distribution summary
+
+## [4.5]{style="color:grey"} One-sample test: *gghistostats()* method (`type = bayes` with normal curve) & adjusting linewidth
+
+::: panel-tabset
+
+## Linewidth = 2
+
+```{r}
+set.seed(1234)
+```
+
+```{r}
+  gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = TRUE, #Argument toggled to TRUE - Normal Distribution curve plotted
+  normal.curve.args = list(linewidth = 2), #Adjust linewidth as needed. (from 2 to 0.5)
+  xlab = "English scores"
+)
+```
+## Linewidth = 0.5
+```{r}
+set.seed(1234)
+```
+
+```{r}
+  gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  bin.args = list(colour = "black",
+                  fill = "grey50",
+                  alpha = 0.7),
+  normal.curve = TRUE, #Argument toggled to TRUE - Normal Distribution curve plotted
+  normal.curve.args = list(linewidth = 0.5), #Adjust linewidth as needed. (from 2 to 0.5)
+  xlab = "English scores"
+)
+```
+:::
+
+## [4.6]{style="color:grey"} One-sample test: *ggdotplotstats()*	for distribution about labeled numeric variable
+
+```{r}
+ggdotplotstats(
+  data = exam,
+  x = ENGLISH,
+  y = CLASS,
+  title = "",
+  xlab = ""
+)
+```
+
+Plot above indicates that on average students from 3D Class perform better than students from 3C Class.
+
+## [4.6]{style="color:grey"} Creating Box/Violin plot using **ggwithinstats()**
+
+```{r}
+exam_long <- exam %>%
+   pivot_longer(
+     cols = ENGLISH:SCIENCE,
+     names_to = "SUBJECT",
+     values_to = "SCORES") %>%
+   filter(CLASS == "3A")
+```
+
+::: callout-note
+## Learning Point
+Current data is arranged columns wise by individual students, race, scores etc. To compare individual scores of students for ggstatsplot, the column will have to be combined. Hence we transform the data using `_long` the initial three columns ENGLISH, MATHS, SCIENCE are combined into one.
+:::
+
+```{r}
+ggwithinstats(
+  data = filter(exam_long,
+                SUBJECT %in%
+                  c("MATHS", "SCIENCE")),
+  x    = SUBJECT,
+  y    = SCORES,
+  type = "p"
+)
+```
+
+## [4.7]{style="color:grey"} Creating plot using **ggscatterstats()**
+
+```{r}
+ggscatterstats(
+  data = exam,
+  x = MATHS,
+  y = ENGLISH,
+  marginal = TRUE,
+  label.var = ID,
+  label.expression = ENGLISH > 90 & MATHS > 90,
+)
+```
+-  English and Maths scores greater than 90 are incorporated as labels in test statistics.
+-  **Note**: To remove line if intending to show correlation -> smooth.line.args - controls the line.
