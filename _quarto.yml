@@ -21,6 +21,8 @@ website:
             href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b/Hands-on_Ex04b.html"
           - text: "Hands-on Exercise 4c"
             href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c/Hands-on_Ex04c.html"
+          - text: "Hands-on Exercise 5"
+            href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html"
       - text: "In-class Exercise"
         menu: 
           - text: "In-class Exercise 1"
@@ -39,14 +41,14 @@ website:
             href: "Take-home_Ex/Take-home_Ex03"
           - text: "Take-home Exercise 4"
             href: "Take-home_Ex/Take-home_Ex04"
+      - text: "Visual Analytics Project"
+        menu: 
+          - text: "ISSS608 Group Project (In Progress)"
+            href: "Project/Project.html"
     right:
       - href: index.qmd
         text: Home
       - about.qmd
-      - icon: linkedin
-        href: https://www.linkedin.com/in/ho-zi-jun-profile/
-      - icon: envelope-fill
-        href: mailto:zijun.ho.2023@mitb.smu.edu.sg
 
 format:
   html:

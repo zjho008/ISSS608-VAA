@@ -1,11 +1,26 @@
 ---
 title: "About"
+about:
+  template: solana
+  image-shape: rectangle
+  image: 'images/clipboard-622340585.png'
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/zjho008
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/ho-zi-jun-profile/
+    - icon: envelope-fill
+      text: Email
+      href: mailto:zijun.ho.2023@mitb.smu.edu.sg
+    - icon: diagram-3-fill
+      text: Tableau
+      href: https://public.tableau.com/app/profile/zi.jun.ho/vizzes
 ---
 
-Welcome to my **Visual Analytics and Applications** Netlify page. This page aims to document and showcase my coursework and projects for this module.
+I'm Zi Jun, a dedicated professional pursuing a Master's of IT in Business (Analytics Track) at Singapore Management University (SMU). With a bachelor's in Business and a passion for data analytics, I am currently focusing on leveraging Python and R programming to uncover insights and solve complex problems. Join me as I explore the world of visual analytics, turning data into compelling stories.
 
 You may reach me via email or we can connect with each other on LinkedIn!
 
-![](images/clipboard-622340585.png)
-
-***Thank you!***
+***Thank you for dropping by!***

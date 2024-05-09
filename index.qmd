@@ -1,7 +1,24 @@
 ---
-title: "ISSS608 Visual Analytics and Applications"
+title: "ISSS608 Visual Analytics and Applications Homepage"
+about:
+  template: jolla
+  image-shape: rectangle
+  image: 'images/giphy.gif'
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/zjho008
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/ho-zi-jun-profile/
+    - icon: envelope-fill
+      text: Email
+      href: mailto:zijun.ho.2023@mitb.smu.edu.sg
+    - icon: diagram-3-fill
+      text: Tableau
+      href: https://public.tableau.com/app/profile/zi.jun.ho/vizzes
 listing:
-  type: default
+  type: grid
   max-items: 6
   contents:
     - "In-class_Ex/*/*.qmd"
@@ -12,8 +29,8 @@ listing:
     - "date desc"
 ---
 
-Hey there! Welcome to my **Visual Analytics and Applications** homepage! From here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
+Hey there! Welcome to my **Visual Analytics and Applications** page which documents and showcase my coursework and projects for this module.
 
-![](images/Screenshot%202024-04-18%20155823.png)
+From here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
 
 #### **A Feature of My Latest Works:**
