@@ -52,7 +52,7 @@ website:
 
 format:
   html:
-    theme: zephyr
+    theme: cerulean
     css: styles.css
     toc: true
 
