@@ -396,7 +396,9 @@ newsgroup_cors %>%
                  repel = TRUE) +
   theme_void()
 ```
+
 The code chunk:
+
 ```{r}
 #| eval: false
 set.seed(2017)
@@ -503,7 +505,8 @@ ggraph(bigram_graph, layout = "fr") +
                  hjust = 1)
 ```
 
-The code chunk used to plot the network graph: 
+The code chunk used to plot the network graph:
+
 ```{r}
 #| eval: false
 
