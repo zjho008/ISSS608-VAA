@@ -1,0 +1,686 @@
+---
+title: "Take-home Exercise 2: DataVis Makeover"
+author: "Ho Zi Jun"
+date: "May 05, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## [1]{style="color:grey"} Overview
+
+In [Take-home Exercise 1](https://isss608-zjho008.netlify.app/take-home_ex/take-home_ex01/take-home_ex01), we were tasked to produce two to three data visualisations using ggplot2 and its extensions to reveal the private residential market and sub-markets of Singapore for the 1st quarter of 2024. The data preparation was also processed by using the tidyverse family of packages. The exercise allowed us to explore factors such as `Transacted Price ($)` and `Unit Price ($ PSM)` in relation to `Property Type`and `Planning Region` to list a few.
+
+For this Take-home Exercise 1 (Part 2), the objective is to perform a makeover and improve on the original data visualisation from other peers. We will be critiquing one data visualisation in terms of its clarity and aesthetics. A sketch of the alternative design will be done up based on the data visualisation design principles (four quadrants of clarity and aesthetic) and finally a remake of the original design will be implemented.
+
+## [2]{style="color:grey"} Getting Started
+
+### [2.1]{style="color:grey"} Installing and loading the required libraries
+
+-   [tidyverse](https://www.tidyverse.org/): (i.e. readr, tidyr, dplyr, ggplot2) for performing data science tasks such as importing, tidying, and wrangling data, as well as creating graphics based on The Grammar of Graphics,
+-   [reshape2](https://seananderson.ca/2013/10/19/reshape/) for transforming data between wide and long formats
+-   [ggthemes](https://ggplot2.tidyverse.org/reference/ggtheme.html): provides some extra themes, geoms, and scales for ‘ggplot2’.
+-   [ggdist](https://mjskay.github.io/ggdist/): a ggplot2 extension specially designed for visualising distribution and uncertainty
+-   [patchwork](https://patchwork.data-imaginist.com/): an R package for preparing composite figure created using ggplot2.
+-   [ggridges](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html): a ggplot2 extension specially designed for plotting [ridgeline plots](https://www.data-to-viz.com/graph/ridgeline.html).
+-   [ggrepel](https://ggrepel.slowkow.com/): an R package which provides geoms for ggplot2 to repel overlapping text labels.
+-   [knitr](https://www.rdocumentation.org/packages/knitr/versions/1.45): for building static html table to aid us in having a better view of tables
+-   [lubridate](https://cran.r-project.org/web/packages/lubridate/index.html): R package that makes it easier to work with dates and times.
+-   [patchwork](https://cran.r-project.org/web/packages/patchwork/index.html): an R package for preparing composite figure created using ggplot2.
+
+The code chunk below uses `p_load()` function from pacman package to check if packages listed are already installed in the computer. The packages will be loaded if they are found to be installed. Otherwise, the function will proceed to install and load them into R environment.
+
+```{r}
+pacman::p_load(tidyverse, reshape2, ggthemes,
+               ggdist, patchwork, ggridges,
+               ggrepel, knitr, lubridate,
+               patchwork)
+```
+
+### [2.2]{style="color:grey"} Data Import and Wrangling
+
+::: panel-tabset
+## Labelling Data
+
+The subsequent code chunks utilises the `read_csv` function to import the five `.csv` data files from [REALIS](https://www.ura.gov.sg/reis/index) into the R environment. The data will also be labelled as such for identification:
+
+-   **2023Q1**: ResidentialTransaction20240308160536
+-   **2023Q2**: ResidentialTransaction20240308160736
+-   **2023Q3**: ResidentialTransaction20240308161009
+-   **2023Q4**: ResidentialTransaction20240308161109
+-   **2024Q1**: ResidentialTransaction20240414220633
+
+The code chunk below utilises the [rename_with()](https://dplyr.tidyverse.org/reference/rename.html) function to change the column names accordingly using `column_rename` as an object.
+
+```{r}
+column_rename <- function(orig_name) {
+  # Add underscores to spaces
+  gsub(" +", "_",
+       # Remove special characters
+       gsub("[^A-Z ]", "",
+            # Convert to upper case and remove trailing spaces
+            toupper(orig_name)) %>% trimws())
+}
+```
+
+## 2023Q1
+
+```{r}
+property_2023q1 <- read_csv('data/ResidentialTransaction20240308160536.csv') %>%
+                  rename_with(column_rename)
+kable(head(property_2023q1, n=5))
+```
+
+## 2023Q2
+
+```{r}
+property_2023q2 <- read_csv('data/ResidentialTransaction20240308160736.csv') %>%
+                  rename_with(column_rename)
+kable(head(property_2023q1, n=5))
+```
+
+## 2023Q3
+
+```{r}
+property_2023q3 <- read_csv('data/ResidentialTransaction20240308161009.csv') %>%
+                  rename_with(column_rename)
+kable(head(property_2023q1, n=5))
+```
+
+## 2023Q4
+
+```{r}
+property_2023q4 <- read_csv('data/ResidentialTransaction20240308161109.csv') %>%
+                  rename_with(column_rename)
+kable(head(property_2023q1, n=5))
+```
+
+## 2024Q1
+
+```{r}
+property_2024q1 <- read_csv('data/ResidentialTransaction20240414220633.csv') %>%
+                  rename_with(column_rename)
+kable(head(property_2023q1, n=5))
+```
+:::
+
+The code chunk below `glimpse()` will provide us with an overview of the data.
+
+::: panel-tabset
+## 2023Q1
+
+```{r}
+glimpse(property_2023q1)
+```
+
+## 2023Q2
+
+```{r}
+glimpse(property_2023q2)
+```
+
+## 2023Q3
+
+```{r}
+glimpse(property_2023q3)
+```
+
+## 2023Q4
+
+```{r}
+glimpse(property_2023q4)
+```
+
+## 2024Q1
+
+```{r}
+glimpse(property_2024q1)
+```
+:::
+
+## Data Wrangling
+
+::: panel-tabset
+## Adding columns
+
+```{r}
+property_2023q1 <- property_2023q1 %>%
+  mutate(
+    QUARTER="2023Q1",
+    MONTH_YEAR=format(dmy(SALE_DATE), "%b-%y")
+  )
+property_2023q2 <- property_2023q2 %>%
+  mutate(
+    QUARTER="2023Q2",
+    MONTH_YEAR=format(dmy(SALE_DATE), "%b-%y")
+  )
+property_2023q3 <- property_2023q3 %>%
+  mutate(
+    QUARTER="2023Q3",
+    MONTH_YEAR=format(dmy(SALE_DATE), "%b-%y")
+  )
+property_2023q4 <- property_2023q4 %>%
+  mutate(
+    QUARTER="2023Q4",
+    MONTH_YEAR=format(dmy(SALE_DATE), "%b-%y")
+  )
+property_2024q1 <- property_2024q1 %>%
+  mutate(
+    QUARTER="2024Q1",
+    MONTH_YEAR=format(dmy(SALE_DATE), "%b-%y")
+  )
+
+```
+
+## Combining tables
+
+```{r}
+realis <- property_2023q1 %>%
+  rbind(property_2023q2) %>%
+  rbind(property_2023q3) %>%
+  rbind(property_2023q4) %>%
+  rbind(property_2024q1)
+kable(head(realis, n=10))
+```
+
+## Filtering necessary columns (The code chunk)
+
+After adding the `QUARTER` columns, there are now 22 variables in the dataframe. However, for this exercise not all of them are necessary to carry out the analysis. We shall filter out the necessary columns and drop the rest for efficiency.
+
+```{r}
+realis <-
+  realis %>% select(
+    c(
+      QUARTER,
+      MONTH_YEAR,
+      PROPERTY_TYPE,
+      PLANNING_REGION,
+      PLANNING_AREA,
+      TRANSACTED_PRICE,
+      AREA_SQFT,
+      UNIT_PRICE_PSF,
+      SALE_DATE
+    )
+  )
+glimpse(realis) #Overview of transformed data
+```
+
+Upon using `glimpse()`, it can be observed that there are 9 variables relevant to our data viz makeover.
+:::
+
+## [3]{style="color:grey"} Data Visualisation Makeover
+
+In this section, we will proceed with a makeover of a peer's data visualisation and building an improved version. Shown below is the plot of our peer's plot.
+
+::: callout-note
+## The author stated:
+
+As we mentioned about the individual market is focus on the apartment and condominium above, and we know the distribution of total property, what about the first quarter unit price of these two popular goods?
+
+Upon examination of the violin plots, a clear disparity emerges between the average unit prices of condominiums and apartments, standing at approximately \$1,500 and \$2,000, respectively, for the period spanning January to March. Noteworthy is the discernible uptick in both unit price and transaction volume from January to March 2024. Despite an overall reduction in total transactions vis-a-vis the preceding year, there is an unmistakable trend towards growth within specific sub-markets, suggesting an increasing inclination towards higher-value properties
+:::
+
+::: panel-tabset
+## The code chunk (i)
+
+```{r}
+#| eval: false
+filtered_data <- combined_data %>%
+  mutate(Sale_Date = dmy(`Sale Date`)) %>%
+  filter((year(Sale_Date) == 2023 & 
+          month(Sale_Date) %in% 1:12) |
+         (year(Sale_Date) == 2024 & 
+          month(Sale_Date) %in% 1:3)) %>%
+  mutate(Quarter_Sale_Data = case_when(
+    between(Sale_Date, as.Date("2023-01-01"), as.Date("2023-03-31")) ~ "Q1_2023",
+    between(Sale_Date, as.Date("2023-04-01"), as.Date("2023-06-30")) ~ "Q2_2023",
+    between(Sale_Date, as.Date("2023-07-01"), as.Date("2023-09-30")) ~ "Q3_2023",
+    between(Sale_Date, as.Date("2023-10-01"), as.Date("2023-12-31")) ~ "Q4_2023",
+    between(Sale_Date, as.Date("2024-01-01"), as.Date("2024-03-31")) ~ "Q1_2024",
+    TRUE ~ NA_character_
+  )) %>%
+  filter(!is.na(Quarter_Sale_Data)) %>%
+  mutate(Month_Sale_Data = paste0(year(Sale_Date), "-", month(Sale_Date)))
+
+filtered_data <- filtered_data %>%
+  filter(`Property Type` %in% c("Apartment", "Condominium"))
+
+ggplot(filtered_data, aes(x = Month_Sale_Data, y = `Unit Price ($ PSF)`, color = `Property Type`)) +
+  geom_violin() +
+  geom_point(position = "jitter",
+             size = 0.1) +
+  labs(title = "Unit Price per Square Foot for Apartments and Condominiums",
+       x = "Month",
+       y = "Unit Price ($ PSF)") +
+  theme_light(base_size = 6) +
+  xlim(c("2024-1","2024-2","2024-3"))
+```
+
+## The plot (i)
+
+![Peer's Data Visualisation](peer1.png)
+
+## The code chunk (ii)
+
+```{r}
+#| eval: false
+ggplot(filtered_data, aes(x = Month_Sale_Data, y = `Unit Price ($ PSF)`, color = `Property Type`)) +
+  geom_violin() +
+  geom_point(position = "jitter",
+             size = 0.1) +
+  labs(title = "Unit Price per Square Foot for Apartments and Condominiums",
+       x = "Month",
+       y = "Unit Price ($ PSF)") +
+  theme_light(base_size = 6) +
+  xlim(c("2023-1","2023-2","2023-3"))
+```
+
+## The plot (ii)
+
+![Peer's Data Visualisation](peer2.png)
+:::
+
+### [3.1]{style="color:grey"} Observations: Clarity and Aesthetics
+
+[Clarity]{.underline}
+
+-   The use of a violin plot overlaid with scatter plot points helps illustrate the distribution of prices per square foot for both apartments and condominiums across different months.
+
+-   The red (apartment) and teal (condominium) color distinction or scatterplot is generally clear, but there's significant overlap in data points, which may confuse the viewer about the exact differences in price distributions between these property types. This might also affect the ease of reading and understanding by audiences from the general public.
+
+[Aesthetics]{.underline}
+
+-   The main title while clear could be centralised for easier readability.
+
+-   The plot successfully uses colour to differentiate between the two types of properties. The choice of colors is visually distinct, which is helpful for quick differentiation.
+
+-   However, the presence of outliers, particularly those extreme values shown as vertical lines extending from the main bodies of the violins, can confuse readers from the overall trends from the plot.
+
+### [3.2]{style="color:grey"} Sketch of alternative design
+
+![Sketch ideation](idea.jpg) Improvements based on the above points mentioned earlier:
+
+-   Main title which was centred to give improved balanced to the plot layout.
+
+-   Combine each different selected property type into each portion of the chart, sharing the same y-axis to reveal the distribution among different property types simultaneously.
+
+-   Added additional pointers and/or labels to highlight summary statistic values such as Mean, Median and IQR.
+
+-   Address the issue of outliers in the plot for this case I have chosen to highlight the outliers to enable readers to be aware and take note of them since they were still actual property transactions.
+
+-   Use widely different colours to differentiate between the variables for better visual distinction.
+
+### [3.3]{style="color:grey"} Remake of Original Design
+
+#### 1st iteration
+
+Derived from the sketch ideation, this plot shows Unit Price (\$ PSF) by Quarter as a start.
+
+```{r}
+ggplot(data= realis,
+       aes(x= QUARTER, y= UNIT_PRICE_PSF, color = QUARTER)) +
+  geom_violin(aes(fill = QUARTER), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width= 0.4, outlier.colour = "grey20", outlier.size = 1, 
+               outlier.alpha = 0.3) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +  
+  coord_cartesian(ylim = c(400,6000)) +
+  scale_color_manual(values=c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC", "#0437bf")) +
+  theme_economist() +
+  labs(title="Unit Price ($PSF) by Quarter") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title=element_text(size= 12, hjust= 0.5),
+        axis.text = element_text(size= 10),
+        legend.position = "none")
+```
+
+#### 2nd iteration (Filtering of variables)
+
+To accommodate to the peer's selection of selected property type
+
+```{r}
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         QUARTER %in% c("2023Q1", "2024Q1"))
+
+ggplot(data= filtered_data,
+       aes(x= QUARTER, y= UNIT_PRICE_PSF, color = QUARTER)) +
+  geom_violin(aes(fill = QUARTER), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width= 0.4, outlier.colour = "grey20", outlier.size = 1, 
+               outlier.alpha = 0.3) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +  
+  coord_cartesian(ylim = c(400,6000)) +
+  scale_color_manual(values=c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC", "#0437bf")) +
+  theme_economist() +
+  labs(title="Unit Price ($PSF) by Quarter") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title=element_text(size= 12, hjust= 0.5),
+        axis.text = element_text(size= 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+```
+
+#### 3rd iteration (Filtering of variables)
+
+To accommodate to the peer's selection of time period (Month)
+
+```{r}
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-23", "Feb-23", "Mar-23")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-23", "Feb-23", "Mar-23")))
+
+ggplot(data= filtered_data,
+       aes(x= MONTH_YEAR, y= UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width= 0.4, outlier.colour = "grey20", outlier.size = 1, 
+               outlier.alpha = 0.3) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +  
+  coord_cartesian(ylim = c(400,6000)) +
+  scale_color_manual(values=c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC", "#0437bf")) +
+  theme_economist() +
+  labs(title="Unit Price ($PSF) by Month") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title=element_text(size= 12, hjust= 0.5),
+        axis.text = element_text(size= 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+```
+
+#### 4th iteration (Addition of Summary Statistics)
+
+For Year 2023
+
+```{r}
+# Filter and order the data as before
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-23", "Feb-23", "Mar-23")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-23", "Feb-23", "Mar-23")))
+
+# Calculate summary statistics for annotations
+stats_data <- filtered_data %>%
+  group_by(MONTH_YEAR, PROPERTY_TYPE) %>%
+  summarise(
+    Mean = mean(UNIT_PRICE_PSF),
+    Median = median(UNIT_PRICE_PSF),
+    IQR = IQR(UNIT_PRICE_PSF),
+    .groups = 'drop'
+  )
+
+# Generate the violin plot with statistical annotations
+plot1 <- ggplot(data = filtered_data,
+       aes(x = MONTH_YEAR, y = UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width = 0.4, outlier.colour = "grey20", outlier.size = 1, 
+               outlier.alpha = 0.3) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +
+  geom_text(data = stats_data, aes(label = sprintf("Mean: %.2f\nMedian: %.2f\nIQR: %.2f", Mean, Median, IQR), 
+                                   y = 5500), size = 3, hjust = 0.5) +
+  coord_cartesian(ylim = c(400, 6000)) +
+  scale_color_manual(values = c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC")) +
+  theme_economist() +
+  labs(title = "Unit Price ($PSF) by Month (Year 2023)") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+
+# Display the plot
+print(plot1)
+
+```
+
+For Year 2024
+
+```{r}
+# Filter and order the data as before
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-24", "Feb-24", "Mar-24")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-24", "Feb-24", "Mar-24")))
+
+# Calculate summary statistics for annotations
+stats_data <- filtered_data %>%
+  group_by(MONTH_YEAR, PROPERTY_TYPE) %>%
+  summarise(
+    Mean = mean(UNIT_PRICE_PSF),
+    Median = median(UNIT_PRICE_PSF),
+    IQR = IQR(UNIT_PRICE_PSF),
+    .groups = 'drop'
+  )
+
+# Generate the violin plot with statistical annotations
+plot2 <- ggplot(data = filtered_data,
+       aes(x = MONTH_YEAR, y = UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width = 0.4, outlier.colour = "grey20", outlier.size = 1, 
+               outlier.alpha = 0.3) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +
+  geom_text(data = stats_data, aes(label = sprintf("Mean: %.2f\nMedian: %.2f\nIQR: %.2f", Mean, Median, IQR), 
+                                   y = 5500), size = 3, hjust = 0.5) +
+  coord_cartesian(ylim = c(400, 6000)) +
+  scale_color_manual(values = c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC")) +
+  theme_economist() +
+  labs(title = "Unit Price ($PSF) by Month (Year 2024)") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+
+# Display the plot
+print(plot2)
+```
+
+#### 5th iteration (Highlighting Outliers)
+
+```{r}
+# Filter and order the data as before
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-23", "Feb-23", "Mar-23")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-23", "Feb-23", "Mar-23")))
+
+# Calculate summary statistics for annotations
+stats_data <- filtered_data %>%
+  group_by(MONTH_YEAR, PROPERTY_TYPE) %>%
+  summarise(
+    Mean = mean(UNIT_PRICE_PSF),
+    Median = median(UNIT_PRICE_PSF),
+    IQR = IQR(UNIT_PRICE_PSF),
+    .groups = 'drop'
+  )
+
+# Generate the violin plot with statistical annotations
+plot1 <- ggplot(data = filtered_data,
+       aes(x = MONTH_YEAR, y = UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width = 0.4, outlier.colour = "darkred", outlier.size = 1, outlier.shape = 8, 
+               outlier.alpha = 0.8) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +
+  geom_text(data = stats_data, aes(label = sprintf("Mean: %.2f\nMedian: %.2f\nIQR: %.2f", Mean, Median, IQR), 
+                                   y = 5500), size = 3, hjust = 0.5) +
+  coord_cartesian(ylim = c(400, 6000)) +
+  scale_color_manual(values = c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC")) +
+  theme_economist() +
+  labs(title = "Unit Price ($PSF) by Month (Year 2023)") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+
+# Display the plot
+print(plot1)
+
+```
+
+## [4]{style="color:grey"} Improved Visualisation
+
+::: panel-tabset
+## Jan-Mar 2024
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+# Filter and order the data as before
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-24", "Feb-24", "Mar-24")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-24", "Feb-24", "Mar-24")))
+
+# Calculate summary statistics for annotations
+stats_data <- filtered_data %>%
+  group_by(MONTH_YEAR, PROPERTY_TYPE) %>%
+  summarise(
+    Mean = mean(UNIT_PRICE_PSF),
+    Median = median(UNIT_PRICE_PSF),
+    IQR = IQR(UNIT_PRICE_PSF),
+    .groups = 'drop'
+  )
+
+# Generate the violin plot with statistical annotations
+plot1 <- ggplot(data = filtered_data,
+       aes(x = MONTH_YEAR, y = UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width = 0.4, outlier.colour = "darkred", outlier.size = 1, outlier.shape = 8, 
+               outlier.alpha = 0.8) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +
+  geom_text(data = stats_data, aes(label = sprintf("Mean: %.2f\nMedian: %.2f\nIQR: %.2f", Mean, Median, IQR), 
+                                   y = 5500), size = 3, hjust = 0.5) +
+  coord_cartesian(ylim = c(400, 6000)) +
+  scale_color_manual(values = c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC")) +
+  theme_economist() +
+  labs(title = "Unit Price ($PSF) by Month (Year 2024)") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+
+# Display the plot
+print(plot1)
+```
+
+## Jan-Mar 2023
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+# Filter and order the data as before
+filtered_data <- realis %>%
+  filter(PROPERTY_TYPE %in% c("Apartment", "Condominium"),
+         MONTH_YEAR %in% c("Jan-23", "Feb-23", "Mar-23")) %>%
+  mutate(MONTH_YEAR = factor(MONTH_YEAR, levels = c("Jan-23", "Feb-23", "Mar-23")))
+
+# Calculate summary statistics for annotations
+stats_data <- filtered_data %>%
+  group_by(MONTH_YEAR, PROPERTY_TYPE) %>%
+  summarise(
+    Mean = mean(UNIT_PRICE_PSF),
+    Median = median(UNIT_PRICE_PSF),
+    IQR = IQR(UNIT_PRICE_PSF),
+    .groups = 'drop'
+  )
+
+# Generate the violin plot with statistical annotations
+plot1 <- ggplot(data = filtered_data,
+       aes(x = MONTH_YEAR, y = UNIT_PRICE_PSF, color = MONTH_YEAR)) +
+  geom_violin(aes(fill = MONTH_YEAR), size = 0.6, alpha = 0.3, linewidth = 0) +
+  geom_boxplot(width = 0.4, outlier.colour = "darkred", outlier.size = 1, outlier.shape = 8, 
+               outlier.alpha = 0.8) +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="black",        
+               size=2) +
+  geom_text(data = stats_data, aes(label = sprintf("Mean: %.2f\nMedian: %.2f\nIQR: %.2f", Mean, Median, IQR), 
+                                   y = 5500), size = 3, hjust = 0.5) +
+  coord_cartesian(ylim = c(400, 6000)) +
+  scale_color_manual(values = c("#c73824", "#0477bf", "#9E9E9E", "#0CDBBC")) +
+  theme_economist() +
+  labs(title = "Unit Price ($PSF) by Month (Year 2023)") +
+  scale_y_continuous(breaks = seq(400, 6000, by = 500)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 10),
+        legend.position = "none") +
+  facet_wrap(~PROPERTY_TYPE)
+
+# Display the plot
+print(plot1)
+```
+:::
+
+## [5]{style="color:grey"} Key Takeaways
+
+Overall, the selected peer's work was done up relatively well.
+
+The processes for the data visualisation makeover in this take-home exercise illustrates the utmost importance of attention to detail when making a plot. Here are some pointers which I found were useful:
+
+-   To check the data
+
+    -   It goes without saying that data is the core element of any chart or graph. If the data is unreliable, the graph will also be unreliable. Therefore, it's crucial to ensure your data is accurate. Begin by creating straightforward graphs to identify any outliers or unusual spikes. Always double-check anything that looks off. You may find a surprising number of data entry errors in the spreadsheets you receive.
+
+-   Choosing of colours
+
+    -   Effective use of color can significantly enhance and clarify a presentation, while poor use of color can lead to confusion and obscurity. Although color adds an aesthetic quality, its primary role in displaying information is functional. The key is to consider what information needs to be conveyed and to determine if and how color can improve the communication of that information.
+
+-   Highlighting what's important
+
+    -   To effectively communicate a message, it's essential to direct your audience's attention to the data under analysis. Start with a title that captures the essence of your insight. Then, emphasize your data visually while maintaining other data in a subdued manner in the background, providing context and enabling comparisons.
+
+## [6]{style="color:grey"} References
+
+-   [URA releases flash estimate of 1st Quarter 2024 private residential property price index](https://www.ura.gov.sg/Corporate/Media-Room/Media-Releases/pr24-11)
+
+-   [Unsold private housing stock on the rise ahead of ramp-up in new launches in 2024](https://www.businesstimes.com.sg/property/unsold-private-housing-stock-rise-ahead-ramp-new-launches-2024)
+
+-   [HDB resale prices rise 1.7%; private home prices up 1.5% in first quarter: Flash estimates](https://www.channelnewsasia.com/singapore/hdb-resale-private-home-prices-rise-waiting-period-property-analysts-4233876)
+
+-   [7 Basic Rules for Making Charts and Graphs](https://flowingdata.com/2010/07/22/7-basic-rules-for-making-charts-and-graphs/)
+
+-   [Data Visualization: Clarity or Aesthetics?](https://isss608-ay2023-24apr.netlify.app/lesson/lesson02/lesson02-designing%20graphs%20to%20enlighten#/data-visualization-clarity-or-aesthetics)
+
+-   [Dos and don’ts of data visualisation — European Environment Agency](https://www.eea.europa.eu/data-and-maps/daviz/learn-more/chart-dos-and-donts)
+
+-   [Choosing Colors for Data Visualization](https://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf)

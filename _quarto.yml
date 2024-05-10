@@ -34,13 +34,12 @@ website:
       - text: "Take-home Exercise"
         menu: 
           - text: "Take-home Exercise 1"
-            href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01_Part1.html"
+            href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html"
           - text: "Take-home Exercise 2"
-            href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01_Part2.html"
+            href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"
           - text: "Take-home Exercise 3"
             href: "Take-home_Ex/Take-home_Ex03"
-          - text: "Take-home Exercise 4"
-            href: "Take-home_Ex/Take-home_Ex04"
+
       - text: "Visual Analytics Project"
         menu: 
           - text: "ISSS608 Group Project (In Progress)"
@@ -53,7 +52,9 @@ website:
 
 format:
   html:
-    theme: cerulean
+    theme: zephyr
+    fontsize: 1.1em
+    backgroundcolor: floralwhite
     css: styles.css
     toc: true
 

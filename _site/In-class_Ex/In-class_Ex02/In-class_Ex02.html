@@ -150,6 +150,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c/Hands-on_Ex04c.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 4c</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -177,20 +181,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take-home_Ex01_Part1.html" rel="" target="">
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take-home_Ex01_Part2.html" rel="" target="">
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 2</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex03" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 3</span></a>
   </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-visual-analytics-project" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Visual Analytics Project</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-visual-analytics-project">    
         <li>
-    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex04" rel="" target="">
- <span class="dropdown-text">Take-home Exercise 4</span></a>
+    <a class="dropdown-item" href="../../Project/Project.html" rel="" target="">
+ <span class="dropdown-text">ISSS608 Group Project (In Progress)</span></a>
   </li>  
     </ul>
   </li>
@@ -203,16 +214,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/ho-zi-jun-profile/" rel="" target=""><i class="bi bi-linkedin" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="mailto:zijun.ho.2023@mitb.smu.edu.sg" rel="" target=""><i class="bi bi-envelope-fill" role="img">
-</i> 
- <span class="menu-text"></span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -230,27 +231,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span style="colour:grey">9.1</span> Learning Outcome</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span style="colour:grey">9.2</span> Getting Started</a>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span style="colour:grey">2.1</span> Learning Outcome</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span style="colour:grey">2.2</span> Getting Started</a>
   <ul class="collapse">
-  <li><a href="#installing-and-loading-the-packages" id="toc-installing-and-loading-the-packages" class="nav-link" data-scroll-target="#installing-and-loading-the-packages"><span style="colour:grey">9.2.1</span> Installing and loading the packages</a></li>
-  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span style="colour:grey">9.2.2</span> Data Import</a></li>
+  <li><a href="#installing-and-loading-the-packages" id="toc-installing-and-loading-the-packages" class="nav-link" data-scroll-target="#installing-and-loading-the-packages"><span style="colour:grey">2.2.1</span> Installing and loading the packages</a></li>
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span style="colour:grey">2.2.2</span> Data Import</a></li>
   </ul></li>
-  <li><a href="#visualising-distribution-with-ridgeline-plot" id="toc-visualising-distribution-with-ridgeline-plot" class="nav-link" data-scroll-target="#visualising-distribution-with-ridgeline-plot"><span style="colour:grey">9.3</span> Visualising Distribution with Ridgeline Plot</a>
+  <li><a href="#visualising-distribution-with-ridgeline-plot" id="toc-visualising-distribution-with-ridgeline-plot" class="nav-link" data-scroll-target="#visualising-distribution-with-ridgeline-plot"><span style="colour:grey">2.3</span> Visualising Distribution with Ridgeline Plot</a>
   <ul class="collapse">
-  <li><a href="#plotting-ridgeline-graph-ggridges-method" id="toc-plotting-ridgeline-graph-ggridges-method" class="nav-link" data-scroll-target="#plotting-ridgeline-graph-ggridges-method"><span style="colour:grey">9.3.1</span> Plotting ridgeline graph: ggridges method</a></li>
-  <li><a href="#varying-fill-colors-along-the-x-axis" id="toc-varying-fill-colors-along-the-x-axis" class="nav-link" data-scroll-target="#varying-fill-colors-along-the-x-axis"><span style="colour:grey">9.3.2</span> Varying fill colors along the x axis</a></li>
-  <li><a href="#mapping-the-probabilities-directly-onto-colour" id="toc-mapping-the-probabilities-directly-onto-colour" class="nav-link" data-scroll-target="#mapping-the-probabilities-directly-onto-colour"><span style="colour:grey">9.3.3</span> Mapping the probabilities directly onto colour</a></li>
-  <li><a href="#ridgeline-plots-with-quantile-lines" id="toc-ridgeline-plots-with-quantile-lines" class="nav-link" data-scroll-target="#ridgeline-plots-with-quantile-lines"><span style="colour:grey">9.3.4</span> Ridgeline plots with quantile lines</a></li>
+  <li><a href="#plotting-ridgeline-graph-ggridges-method" id="toc-plotting-ridgeline-graph-ggridges-method" class="nav-link" data-scroll-target="#plotting-ridgeline-graph-ggridges-method"><span style="colour:grey">2.3.1</span> Plotting ridgeline graph: ggridges method</a></li>
+  <li><a href="#varying-fill-colors-along-the-x-axis" id="toc-varying-fill-colors-along-the-x-axis" class="nav-link" data-scroll-target="#varying-fill-colors-along-the-x-axis"><span style="colour:grey">2.3.2</span> Varying fill colors along the x axis</a></li>
+  <li><a href="#mapping-the-probabilities-directly-onto-colour" id="toc-mapping-the-probabilities-directly-onto-colour" class="nav-link" data-scroll-target="#mapping-the-probabilities-directly-onto-colour"><span style="colour:grey">2.3.3</span> Mapping the probabilities directly onto colour</a></li>
+  <li><a href="#ridgeline-plots-with-quantile-lines" id="toc-ridgeline-plots-with-quantile-lines" class="nav-link" data-scroll-target="#ridgeline-plots-with-quantile-lines"><span style="colour:grey">2.3.4</span> Ridgeline plots with quantile lines</a></li>
   </ul></li>
-  <li><a href="#visualising-distribution-with-raincloud-plot" id="toc-visualising-distribution-with-raincloud-plot" class="nav-link" data-scroll-target="#visualising-distribution-with-raincloud-plot"><span style="colour:grey">9.4</span> Visualising Distribution with Raincloud Plot</a>
+  <li><a href="#visualising-distribution-with-raincloud-plot" id="toc-visualising-distribution-with-raincloud-plot" class="nav-link" data-scroll-target="#visualising-distribution-with-raincloud-plot"><span style="colour:grey">2.4</span> Visualising Distribution with Raincloud Plot</a>
   <ul class="collapse">
-  <li><a href="#plotting-a-half-eye-graph" id="toc-plotting-a-half-eye-graph" class="nav-link" data-scroll-target="#plotting-a-half-eye-graph"><span style="colour:grey">9.4.1</span> Plotting a Half Eye graph</a></li>
-  <li><a href="#adding-the-boxplot-with-geom_boxplot" id="toc-adding-the-boxplot-with-geom_boxplot" class="nav-link" data-scroll-target="#adding-the-boxplot-with-geom_boxplot"><span style="colour:grey">9.4.2</span> Adding the boxplot with <code>geom_boxplot()</code></a></li>
-  <li><a href="#adding-the-dot-plots-with-stat_dots" id="toc-adding-the-dot-plots-with-stat_dots" class="nav-link" data-scroll-target="#adding-the-dot-plots-with-stat_dots"><span style="colour:grey">9.4.3</span> Adding the Dot Plots with <code>stat_dots()</code></a></li>
-  <li><a href="#finishing-touch" id="toc-finishing-touch" class="nav-link" data-scroll-target="#finishing-touch"><span style="colour:grey">9.4.4</span> Finishing touch</a></li>
+  <li><a href="#plotting-a-half-eye-graph" id="toc-plotting-a-half-eye-graph" class="nav-link" data-scroll-target="#plotting-a-half-eye-graph"><span style="colour:grey">2.4.1</span> Plotting a Half Eye graph</a></li>
+  <li><a href="#adding-the-boxplot-with-geom_boxplot" id="toc-adding-the-boxplot-with-geom_boxplot" class="nav-link" data-scroll-target="#adding-the-boxplot-with-geom_boxplot"><span style="colour:grey">2.4.2</span> Adding the boxplot with <code>geom_boxplot()</code></a></li>
+  <li><a href="#adding-the-dot-plots-with-stat_dots" id="toc-adding-the-dot-plots-with-stat_dots" class="nav-link" data-scroll-target="#adding-the-dot-plots-with-stat_dots"><span style="colour:grey">2.4.3</span> Adding the Dot Plots with <code>stat_dots()</code></a></li>
+  <li><a href="#finishing-touch" id="toc-finishing-touch" class="nav-link" data-scroll-target="#finishing-touch"><span style="colour:grey">2.4.4</span> Finishing touch</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span style="colour:grey">9.5</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span style="colour:grey">2.5</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -283,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 26, 2024</p>
+      <p class="date-modified">May 10, 2024</p>
     </div>
   </div>
     
@@ -293,13 +294,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <section id="learning-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="learning-outcome"><span style="colour:grey">9.1</span> Learning Outcome</h2>
+<h2 class="anchored" data-anchor-id="learning-outcome"><span style="colour:grey">2.1</span> Learning Outcome</h2>
 <p>Visualising distribution is not new in statistical analysis. In chapter 1, we have learnt some of the popular statistical graphics methods for visualising distributions which are histogram, probability density curve (pdf), boxplot, notch plot and violin plot and how they can be created by using <strong>ggplot2</strong>. In this chapter, we are going to share two relatively new statistical graphic methods for visualising distribution, namely <strong>ridgeline plot</strong> and <strong>raincloud plot</strong> by using ggplot2 and its extensions.</p>
 </section>
 <section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started"><span style="colour:grey">9.2</span> Getting Started</h2>
+<h2 class="anchored" data-anchor-id="getting-started"><span style="colour:grey">2.2</span> Getting Started</h2>
 <section id="installing-and-loading-the-packages" class="level3">
-<h3 class="anchored" data-anchor-id="installing-and-loading-the-packages"><span style="colour:grey">9.2.1</span> Installing and loading the packages</h3>
+<h3 class="anchored" data-anchor-id="installing-and-loading-the-packages"><span style="colour:grey">2.2.1</span> Installing and loading the packages</h3>
 <p>For the purpose of this exercise, the following R packages will be used, they are:</p>
 <ul>
 <li>ggridges, a ggplot2 extension specially designed for plotting ridgeline plots,</li>
@@ -315,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="data-import" class="level3">
-<h3 class="anchored" data-anchor-id="data-import"><span style="colour:grey">9.2.2</span> Data Import</h3>
+<h3 class="anchored" data-anchor-id="data-import"><span style="colour:grey">2.2.2</span> Data Import</h3>
 <p>For the purpose of this exercise, <em>Exam_data.csv</em> will be used.</p>
 <p>In the code chunk below, <a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a> of <a href="https://readr.tidyverse.org/"><strong>readr</strong></a> package is used to import <em>Exam_data.csv</em> into R and saves it into a tibble data.frame.</p>
 <div class="cell">
@@ -324,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="visualising-distribution-with-ridgeline-plot" class="level2">
-<h2 class="anchored" data-anchor-id="visualising-distribution-with-ridgeline-plot"><span style="colour:grey">9.3</span> Visualising Distribution with Ridgeline Plot</h2>
+<h2 class="anchored" data-anchor-id="visualising-distribution-with-ridgeline-plot"><span style="colour:grey">2.3</span> Visualising Distribution with Ridgeline Plot</h2>
 <p><a href="https://www.data-to-viz.com/graph/ridgeline.html"><em>Ridgeline plot</em></a> (sometimes called <em>Joyplot</em>) is a data visualisation technique for revealing the distribution of a numeric value for several groups. Distribution can be represented using histograms or density plots, all aligned to the same horizontal scale and presented with a slight overlap.</p>
 <p>Figure below is a ridgelines plot showing the distribution of English score by class.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -350,7 +351,7 @@ Note
 </div>
 </div>
 <section id="plotting-ridgeline-graph-ggridges-method" class="level3">
-<h3 class="anchored" data-anchor-id="plotting-ridgeline-graph-ggridges-method"><span style="colour:grey">9.3.1</span> Plotting ridgeline graph: ggridges method</h3>
+<h3 class="anchored" data-anchor-id="plotting-ridgeline-graph-ggridges-method"><span style="colour:grey">2.3.1</span> Plotting ridgeline graph: ggridges method</h3>
 <p>There are several ways to plot ridgeline plot with R. In this section, you will learn how to plot ridgeline plot by using <a href="https://wilkelab.org/ggridges/">ggridges</a> package.</p>
 <p>ggridges package provides two main geom to plot gridgeline plots, they are: <a href="https://wilkelab.org/ggridges/reference/geom_ridgeline.html">geom_ridgeline()</a> and <a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges()</a>. The former takes height values directly to draw the ridgelines, and the latter first estimates data densities and then draws those using ridgelines.</p>
 <p>The ridgeline plot below is plotted by using <code>geom_density_ridges()</code>.</p>
@@ -388,7 +389,7 @@ Note
 </div>
 </section>
 <section id="varying-fill-colors-along-the-x-axis" class="level3">
-<h3 class="anchored" data-anchor-id="varying-fill-colors-along-the-x-axis"><span style="colour:grey">9.3.2</span> Varying fill colors along the x axis</h3>
+<h3 class="anchored" data-anchor-id="varying-fill-colors-along-the-x-axis"><span style="colour:grey">2.3.2</span> Varying fill colors along the x axis</h3>
 <p>Sometimes we would like to have the area under a ridgeline not filled with a single solid color but rather with colors that vary in some form along the x axis. This effect can be achieved by using either <a href="https://wilkelab.org/ggridges/reference/geom_ridgeline_gradient.html">geom_ridgeline_gradient()</a> or <a href="https://wilkelab.org/ggridges/reference/geom_ridgeline_gradient.html">geom_density_ridges_gradient()</a>. Both geoms work just like <code>geom_ridgeline()</code> and <code>geom_density_ridges()</code>, except that they allow for varying fill colors. However, they do not allow for alpha transparency in the fill. For technical reasons, we can have changing fill colors or transparency but not both.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">The code chunk</a></li></ul>
@@ -423,7 +424,7 @@ Note
 </div>
 </section>
 <section id="mapping-the-probabilities-directly-onto-colour" class="level3">
-<h3 class="anchored" data-anchor-id="mapping-the-probabilities-directly-onto-colour"><span style="colour:grey">9.3.3</span> Mapping the probabilities directly onto colour</h3>
+<h3 class="anchored" data-anchor-id="mapping-the-probabilities-directly-onto-colour"><span style="colour:grey">2.3.3</span> Mapping the probabilities directly onto colour</h3>
 <p>Besides providing additional geom objects to support the need to plot ridgeline plot, ggridges package also provides a stat function called <a href="https://wilkelab.org/ggridges/reference/stat_density_ridges.html">stat_density_ridges()</a> that replaces <a href="https://ggplot2.tidyverse.org/reference/geom_density.html">stat_density()</a> of ggplot2.</p>
 <p>Figure below is plotted by mapping the probabilities calculated by using <code>stat(ecdf)</code> which represents the empirical cumulative density function for the distribution of English score.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -466,7 +467,7 @@ Important
 </div>
 </section>
 <section id="ridgeline-plots-with-quantile-lines" class="level3">
-<h3 class="anchored" data-anchor-id="ridgeline-plots-with-quantile-lines"><span style="colour:grey">9.3.4</span> Ridgeline plots with quantile lines</h3>
+<h3 class="anchored" data-anchor-id="ridgeline-plots-with-quantile-lines"><span style="colour:grey">2.3.4</span> Ridgeline plots with quantile lines</h3>
 <p>By using <a href="">geom_density_ridges_gradient()</a>, we can colour the ridgeline plot by quantile, via the calculated <code>stat(quantile)</code> aesthetic as shown in the figure below.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">The code chunk</a></li></ul>
@@ -532,11 +533,11 @@ Important
 </section>
 </section>
 <section id="visualising-distribution-with-raincloud-plot" class="level2">
-<h2 class="anchored" data-anchor-id="visualising-distribution-with-raincloud-plot"><span style="colour:grey">9.4</span> Visualising Distribution with Raincloud Plot</h2>
+<h2 class="anchored" data-anchor-id="visualising-distribution-with-raincloud-plot"><span style="colour:grey">2.4</span> Visualising Distribution with Raincloud Plot</h2>
 <p>Raincloud Plot is a data visualisation technique that produces a half-density to a distribution plot. It gets the name because the density plot is in the shape of a “raincloud”. The raincloud (half-density) plot enhances the traditional box-plot by highlighting multiple modalities (an indicator that groups may exist). The boxplot does not show where densities are clustered, but the raincloud plot does!</p>
 <p>In this section, we will learn how to create a raincloud plot to visualise the distribution of English score by race. It will be created by using functions provided by <strong>ggdist</strong> and ggplot2 packages.</p>
 <section id="plotting-a-half-eye-graph" class="level3">
-<h3 class="anchored" data-anchor-id="plotting-a-half-eye-graph"><span style="colour:grey">9.4.1</span> Plotting a Half Eye graph</h3>
+<h3 class="anchored" data-anchor-id="plotting-a-half-eye-graph"><span style="colour:grey">2.4.1</span> Plotting a Half Eye graph</h3>
 <p>First, we will plot a Half-Eye graph by using <a href="https://mjskay.github.io/ggdist/reference/stat_halfeye.html">stat_halfeye()</a> of <strong>ggdist</strong> package.</p>
 <p>This produces a Half Eye visualization, which contains a half-density and a slab-interval.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -577,7 +578,7 @@ Things to learn from the code chunk above
 </div>
 </section>
 <section id="adding-the-boxplot-with-geom_boxplot" class="level3">
-<h3 class="anchored" data-anchor-id="adding-the-boxplot-with-geom_boxplot"><span style="colour:grey">9.4.2</span> Adding the boxplot with <code>geom_boxplot()</code></h3>
+<h3 class="anchored" data-anchor-id="adding-the-boxplot-with-geom_boxplot"><span style="colour:grey">2.4.2</span> Adding the boxplot with <code>geom_boxplot()</code></h3>
 <p>Next, we will add the second geometry layer using <a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a> of ggplot2. This produces a narrow boxplot. We reduce the width and adjust the opacity.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">The code chunk</a></li></ul>
@@ -606,7 +607,7 @@ Things to learn from the code chunk above
 </div>
 </section>
 <section id="adding-the-dot-plots-with-stat_dots" class="level3">
-<h3 class="anchored" data-anchor-id="adding-the-dot-plots-with-stat_dots"><span style="colour:grey">9.4.3</span> Adding the Dot Plots with <code>stat_dots()</code></h3>
+<h3 class="anchored" data-anchor-id="adding-the-dot-plots-with-stat_dots"><span style="colour:grey">2.4.3</span> Adding the Dot Plots with <code>stat_dots()</code></h3>
 <p>Next, we will add the third geometry layer using <a href="https://mjskay.github.io/ggdist/reference/stat_dots.html">stat_dots()</a> of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">The code chunk</a></li></ul>
@@ -639,7 +640,7 @@ Things to learn from the code chunk above
 </div>
 </section>
 <section id="finishing-touch" class="level3">
-<h3 class="anchored" data-anchor-id="finishing-touch"><span style="colour:grey">9.4.4</span> Finishing touch</h3>
+<h3 class="anchored" data-anchor-id="finishing-touch"><span style="colour:grey">2.4.4</span> Finishing touch</h3>
 <p>Lastly, <a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip()</a> of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, <code>theme_economist()</code> of ggthemes package is used to give the raincloud chart a professional publishing standard look.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">The code chunk</a></li></ul>
@@ -675,7 +676,7 @@ Things to learn from the code chunk above
 </section>
 </section>
 <section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references"><span style="colour:grey">9.5</span> References</h2>
+<h2 class="anchored" data-anchor-id="references"><span style="colour:grey">2.5</span> References</h2>
 <ul>
 <li>Kam, T.S (2024). <a href="https://r4va.netlify.app/chap09">9 - Visualising Distribution</a></li>
 <li><a href="https://blog.revolutionanalytics.com/2017/07/joyplots.html">Introducing Ridgeline Plots (formerly Joyplots)</a></li>

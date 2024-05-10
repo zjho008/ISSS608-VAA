@@ -2,6 +2,7 @@
 title: "ISSS608 Visual Analytics and Applications Homepage"
 about:
   template: jolla
+  image-width: 25em
   image-shape: rectangle
   image: 'images/giphy.gif'
   links:
@@ -9,7 +10,7 @@ about:
       text: Github
       href: https://github.com/zjho008
     - icon: linkedin
-      text: Linkedin
+      text: LinkedIn
       href: https://www.linkedin.com/in/ho-zi-jun-profile/
     - icon: envelope-fill
       text: Email
@@ -20,6 +21,8 @@ about:
 listing:
   type: grid
   max-items: 6
+  table-hover: true
+  max-description-length: 150
   contents:
     - "In-class_Ex/*/*.qmd"
     - "Hands-on_Ex/*/*.qmd"

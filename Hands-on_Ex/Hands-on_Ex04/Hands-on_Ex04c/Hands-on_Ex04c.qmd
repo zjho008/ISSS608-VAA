@@ -226,6 +226,8 @@ fp_ggplotly
 
 ## [12.6]{style="color:grey"} References
 
+-   Kam, T.S. (2024). [Funnel Plots for Fair Comparisons](https://r4va.netlify.app/chap12)
+
 -   [funnelPlotR](https://nhs-r-community.github.io/FunnelPlotR/) package.
 
 -   [Funnel Plots for Indirectly-standardised ratios](https://nhs-r-community.github.io/FunnelPlotR/articles/funnel_plots.html).
