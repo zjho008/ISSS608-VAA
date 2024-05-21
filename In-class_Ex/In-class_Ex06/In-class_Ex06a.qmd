@@ -150,6 +150,7 @@ From the class function it shows that the object class is a "corporaexplorerobje
 ```{r}
 explore(KJB) #pull up the shiny app
 ```
+
 Snapshots of corpus exploration tool
 
 ![](corpus1.png) ![](corpus2.png) ![](corpus3.png) ![](corpus4.png)

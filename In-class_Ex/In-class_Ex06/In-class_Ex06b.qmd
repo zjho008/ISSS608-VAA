@@ -54,6 +54,7 @@ mc3_edges <-
   filter(source!=target) %>%
   ungroup()
 ```
+
 ![MC3 Edges tibble data.frame](mc3edges.png)
 
 ::: callout-note
@@ -62,7 +63,7 @@ mc3_edges <-
 -   `distinct()` is used to ensure that there will be no duplicated records.
 -   `mutate()` and `as.character()` are used to convert the field data type from list to character.
 -   `group_by()` and `summarise()` are used to count the number of unique links
--   the `filter(source!=target)` is to ensure that no records are with similar source and target. 
+-   the `filter(source!=target)` is to ensure that no records are with similar source and target.
 :::
 
 ## [6.4]{style="colour:grey"} Extracing nodes
@@ -76,6 +77,7 @@ mc3_nodes <- as.tibble(mc3_data$nodes) %>% #extracting from the nodes data.frame
          type = as.character(type)) %>%
   select(id, country, type, revenue_omu, product_services)
 ```
+
 ![MC3 Nodes tibble dta.frame](mc3nodes.png)
 
 ::: callout-note
@@ -89,7 +91,7 @@ mc3_nodes <- as.tibble(mc3_data$nodes) %>% #extracting from the nodes data.frame
 
 ## Exploring the edges data frame
 
-In the code chunk below, [`skim()`])(https://docs.ropensci.org/skimr/reference/skim.html) of [**skimr**](https://docs.ropensci.org/skimr/reference/index.html) package is used to display the summary statistics of **mc3_edges** tibble data.frame.
+In the code chunk below, \[`skim()`\])(https://docs.ropensci.org/skimr/reference/skim.html) of [**skimr**](https://docs.ropensci.org/skimr/reference/index.html) package is used to display the summary statistics of **mc3_edges** tibble data.frame.
 
 ```{r}
 skim(mc3_edges)
@@ -151,7 +153,8 @@ centrality_closeness())
 #### Building the graph to visualise
 
 ::: panel-tabset
-## betweenness_centrality >= 100000
+## betweenness_centrality \>= 100000
+
 ```{r}
 mc3_graph %>%
     filter(betweenness_centrality >= 100000) %>% #`filter()` used pull out nodes with betweenness centrality greater than 100000 OR 300000 to avoid graph being too cluttered.
@@ -164,8 +167,11 @@ ggraph(layout = "fr") +
   scale_size_continuous(range = c(1,10)) +
   theme_graph()
 ```
-## betweenness_centrality >= 300000
+
+## betweenness_centrality \>= 300000
+
 increased centrality from 100000 to 300000;
+
 ```{r}
 mc3_graph %>%
     filter(betweenness_centrality >= 300000) %>% #`filter()` used pull out nodes with betweenness centrality greater than 100000 OR 300000 to avoid graph being too cluttered.
@@ -179,5 +185,3 @@ ggraph(layout = "fr") +
   theme_graph()
 ```
 :::
-
-
