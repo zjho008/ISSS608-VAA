@@ -58,7 +58,7 @@ mc3_edges <-
 ![MC3 Edges tibble data.frame](mc3edges.png)
 
 ::: callout-note
-##In the code chunk above,
+##  In the code chunk above
 
 -   `distinct()` is used to ensure that there will be no duplicated records.
 -   `mutate()` and `as.character()` are used to convert the field data type from list to character.
@@ -81,7 +81,7 @@ mc3_nodes <- as.tibble(mc3_data$nodes) %>% #extracting from the nodes data.frame
 ![MC3 Nodes tibble dta.frame](mc3nodes.png)
 
 ::: callout-note
-##  In the code chunk above,
+## In the code chunk above
 
 -   to convert *revenue_omu* from list data type to numeric data type, we would have to convert the values into character first by using `as.character()` followed by `as.numeric()` to convert the data into numeric data type.
 -   `select()` is used to re-organise the order of the fields.

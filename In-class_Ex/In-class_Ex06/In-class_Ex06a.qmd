@@ -158,7 +158,7 @@ Snapshots of corpus exploration tool
 ::: callout-tip
 ## Steps/processes for this exercise
 
--   Preparing and then tidying up the data (wokring with text data instead of usual numerical data)
+-   Preparing and then tidying up the data (working with text data instead of usual numerical data)
 -   Constructing the data frame
 -   Exploration of the data
 :::
