@@ -1,0 +1,17 @@
+---
+title: "In-class Exercise 3"
+author: "Ho Zi Jun"
+date: "April 27, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Links to Tableau Visualisations:
+
+[Superstore Dashboard](https://public.tableau.com/app/profile/zi.jun.ho/viz/Superstore_Dashboard_17142108962120/Superstore_Dashboard)
+
+[Exam Data](https://public.tableau.com/app/profile/zi.jun.ho/viz/Exam_data_Exploration/Dashboard1)

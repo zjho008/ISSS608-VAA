@@ -1,0 +1,83 @@
+---
+title: "In-class Exercise 5a"
+author: "Ho Zi Jun"
+date: "May 11, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  format: html
+editor: visual
+---
+
+## [5.1]{style="color:grey"} An exploration of VAST Challenge 2024 - MC1 data
+
+### [5.1.1]{style="color:grey"} Loading the necessary R packages
+
+```{r}
+pacman::p_load(tidyverse, readtext,
+               quanteda, tidytext)
+```
+
+### [5.1.2]{style="color:grey"} Loading the data
+
+```{r}
+data_folder <- "data/MC1/articles"
+```
+
+### [5.1.3]{style="color:grey"} Text sensing to extract text
+
+```{r}
+text_data <- readtext(paste0("data/MC1/articles",
+                "/*"))
+```
+
+OR the below code chunk can be utilised as well
+
+```{r}
+text_data <- readtext("data/MC1/articles")
+```
+
+## [5.2]{style="color:grey"} Basic tokenisation
+
+```{r}
+usenet_words <- text_data %>%
+  unnest_tokens(word, text) %>%  #reading the text data
+  filter(str_detect(word, "[a-z']$"),
+         !word %in% stop_words$word) #remove stop words
+```
+
+```{r}
+usenet_words %>%
+  count(word, sort = TRUE)
+```
+
+**Observations**- Most common words are: *fishing*, *sustainable* and *company*
+
+### [5.2.1]{style="color:grey"} Creating a table to observe word counts
+
+```{r}
+temp_table <- usenet_words %>%
+  count(word, sort = TRUE)
+```
+
+### [5.2.2]{style="color:grey"} Using corpus to read text data
+
+```{r}
+corpus_text <- corpus(text_data)
+summary(corpus_text, 5)
+```
+
+To separate the data; into 2 columns X & Y.
+
+```{r}
+text_data_splitted <- text_data %>%
+  separate_wider_delim("doc_id",
+                       delim = "__0__",
+                       names = c("X", "Y"),
+                       too_few = "align_end")
+```
+
+Some text are starting with "**1**" hence the split does not occur

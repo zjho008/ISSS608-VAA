@@ -1,0 +1,55 @@
+---
+title: "In-class Exercise 5b"
+author: "Ho Zi Jun"
+date: "May 11, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  format: html
+editor: visual
+---
+
+### [5.3]{style="color:grey"} Loading the necessary R packages
+
+```{r}
+pacman::p_load(jsonlite, tidygraph,
+  ggraph, tidyverse, readtext,
+  quanteda, tidytext)
+```
+
+In the code chunk below, `fromJSON()` of **jsonlite** package is used to import *MC3.json* into R environment.
+
+```{r}
+mc1_data <- fromJSON("data/MC1/mc1.json")
+```
+
+```{r}
+mc2_data <- fromJSON("data/MC2/mc2.json")
+```
+
+::: callout-note
+When attempting to read MC3 data an error message shows up, indicating that there is a problem with the JSON data itself. More specifically an invalid character or format issue at the specified location. This issue is being addressed in Take-home exercise 3.
+:::
+
+![](mc3.png)
+
+### [5.4]{style="color:grey"} Creating separate tibbles for nodes and edges
+
+```{r}
+mc2 <- fromJSON("data/MC2/Oceanus Information/Oceanus Geography Nodes.json")
+```
+
+If other packages used they might be in individual form. From "links" we can observe the time series changes.
+
+```{r}
+mc2_nodes <- as_tibble(mc2_data$nodes) %>%
+    # Select can be used to reorder dataframe columns
+  select(id, type, name)
+
+mc2_edges <- as_tibble(mc2_data$links) %>%
+  # Move Source and Target to the front
+  select(source, target, type, key)
+```
