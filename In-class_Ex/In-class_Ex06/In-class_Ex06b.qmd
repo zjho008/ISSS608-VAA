@@ -9,7 +9,7 @@ execute:
   warning: false
   freeze: true
   format: html
-  editor: visual
+editor: visual
 ---
 
 ## [6.0]{style="colour:grey"} VAST Challenge 2024 - MC3
@@ -78,7 +78,7 @@ mc3_nodes <- as.tibble(mc3_data$nodes) %>% #extracting from the nodes data.frame
   select(id, country, type, revenue_omu, product_services)
 ```
 
-![MC3 Nodes tibble dta.frame](mc3nodes.png)
+![MC3 Nodes tibble data.frame](mc3nodes.png)
 
 ::: callout-note
 ## In the code chunk above
@@ -112,7 +112,7 @@ ggplot(data = mc3_edges,
   geom_text(aes(label = type), stat = "count", vjust = 5.5, colour = "white")
 ```
 
-## [6.6]{style="colour:grey"} Building network model with tidygraph Preparing the network graph
+## [6.6]{style="colour:grey"} Building network model with tidygraph
 
 ### [6.6.1]{style="colour:grey"} Preparing the network graph
 
@@ -157,7 +157,7 @@ centrality_closeness())
 
 ```{r}
 mc3_graph %>%
-    filter(betweenness_centrality >= 100000) %>% #`filter()` used pull out nodes with betweenness centrality greater than 100000 OR 300000 to avoid graph being too cluttered.
+    filter(betweenness_centrality >= 100000) %>% #`filter()` function used pull out nodes with betweenness centrality greater than input value.
 ggraph(layout = "fr") +
   geom_edge_link(aes(alpha=0.5)) +
   geom_node_point(aes(
@@ -170,11 +170,11 @@ ggraph(layout = "fr") +
 
 ## betweenness_centrality \>= 300000
 
-increased centrality from 100000 to 300000;
+increased betweenness_centrality from 100000 to 300000;
 
 ```{r}
 mc3_graph %>%
-    filter(betweenness_centrality >= 300000) %>% #`filter()` used pull out nodes with betweenness centrality greater than 100000 OR 300000 to avoid graph being too cluttered.
+    filter(betweenness_centrality >= 300000) %>% #`filter()` function is used to pull out nodes with betweenness centrality greater than 300000 to avoid the graph being too cluttered.
 ggraph(layout = "fr") +
   geom_edge_link(aes(alpha=0.5)) +
   geom_node_point(aes(

@@ -31,7 +31,7 @@ bible <- readr::read_lines("http://www.gutenberg.org/cache/epub/10/pg10.txt")
 
 the data is a text file; a plain text from a website
 
-## [6.3]{style="colour:grey"} To tidy up the text
+## [6.3]{style="colour:grey"} Tidying up the text
 
 ### [6.3.1]{style="colour:grey"} Pre-processing the text
 
@@ -44,7 +44,7 @@ bible <- paste(bible, collapse = "\n")
 #### Identifying the beginning and end of the Bible / stripping PJ metadata
 
 ::: callout-note
-technique borrowed from - (https://quanteda.io/articles/pkgdown/replication/digital-humanities.html).
+technique borrowed from - [https://quanteda.io/articles/pkgdown/replication/digital-humanities.html](https://quanteda.io/articles/pkgdown/replication/digital-humanities.html).
 :::
 
 ```{r}
@@ -90,7 +90,7 @@ chapters <- str_replace_all(books, "(\\d+:1 )", "NEW_CHAPTER\\1") %>%
 chapters <- lapply(chapters, function(x) x[-1])
 ```
 
-## [6.4]{style="colour:grey"} Metadta
+## [6.4]{style="colour:grey"} Metadata
 
 We are not quite happy with the long book titles in the King James Bible, so we retrieve shorter versions from esv.org which will take up less space in the corpus map plot.
 
