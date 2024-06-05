@@ -158,6 +158,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 6</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 7</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -196,6 +200,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../In-Class_Ex/In-class_Ex06/In-class_Ex06b.html" rel="" target="">
  <span class="dropdown-text">In-class Exercise 6b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-class_Ex07/In-class_Ex07.html" rel="" target="">
+ <span class="dropdown-text">In-class Exercise 7</span></a>
   </li>  
     </ul>
   </li>
@@ -258,11 +266,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exploring-the-king-james-bible" id="toc-exploring-the-king-james-bible" class="nav-link active" data-scroll-target="#exploring-the-king-james-bible"><span style="colour:grey">6.0</span> Exploring the King James Bible</a></li>
   <li><a href="#loading-the-necessary-r-packages" id="toc-loading-the-necessary-r-packages" class="nav-link" data-scroll-target="#loading-the-necessary-r-packages"><span style="colour:grey">6.1</span> Loading the necessary R packages</a></li>
   <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data"><span style="colour:grey">6.2</span> Loading the data</a></li>
-  <li><a href="#to-tidy-up-the-text" id="toc-to-tidy-up-the-text" class="nav-link" data-scroll-target="#to-tidy-up-the-text"><span style="colour:grey">6.3</span> To tidy up the text</a>
+  <li><a href="#tidying-up-the-text" id="toc-tidying-up-the-text" class="nav-link" data-scroll-target="#tidying-up-the-text"><span style="colour:grey">6.3</span> Tidying up the text</a>
   <ul class="collapse">
   <li><a href="#pre-processing-the-text" id="toc-pre-processing-the-text" class="nav-link" data-scroll-target="#pre-processing-the-text"><span style="colour:grey">6.3.1</span> Pre-processing the text</a></li>
   </ul></li>
-  <li><a href="#metadta" id="toc-metadta" class="nav-link" data-scroll-target="#metadta"><span style="colour:grey">6.4</span> Metadta</a></li>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span style="colour:grey">6.4</span> Metadata</a></li>
   <li><a href="#creating-data-frame-with-text-and-metadata" id="toc-creating-data-frame-with-text-and-metadata" class="nav-link" data-scroll-target="#creating-data-frame-with-text-and-metadata"><span style="colour:grey">6.5</span> Creating data frame with text and metadata</a></li>
   <li><a href="#using-corporaexplorer" id="toc-using-corporaexplorer" class="nav-link" data-scroll-target="#using-corporaexplorer"><span style="colour:grey">6.6</span> Using corporaexplorer</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span style="colour:grey">6.7</span> References</a></li>
@@ -298,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 21, 2024</p>
+      <p class="date-modified">May 22, 2024</p>
     </div>
   </div>
     
@@ -325,8 +333,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>the data is a text file; a plain text from a website</p>
 </section>
-<section id="to-tidy-up-the-text" class="level2">
-<h2 class="anchored" data-anchor-id="to-tidy-up-the-text"><span style="colour:grey">6.3</span> To tidy up the text</h2>
+<section id="tidying-up-the-text" class="level2">
+<h2 class="anchored" data-anchor-id="tidying-up-the-text"><span style="colour:grey">6.3</span> Tidying up the text</h2>
 <section id="pre-processing-the-text" class="level3">
 <h3 class="anchored" data-anchor-id="pre-processing-the-text"><span style="colour:grey">6.3.1</span> Pre-processing the text</h3>
 <section id="collapsing-into-one-string." class="level4">
@@ -347,7 +355,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>technique borrowed from - (https://quanteda.io/articles/pkgdown/replication/digital-humanities.html).</p>
+<p>technique borrowed from - <a href="https://quanteda.io/articles/pkgdown/replication/digital-humanities.html">https://quanteda.io/articles/pkgdown/replication/digital-humanities.html</a>.</p>
 </div>
 </div>
 <div class="cell">
@@ -392,8 +400,8 @@ Note
 </section>
 </section>
 </section>
-<section id="metadta" class="level2">
-<h2 class="anchored" data-anchor-id="metadta"><span style="colour:grey">6.4</span> Metadta</h2>
+<section id="metadata" class="level2">
+<h2 class="anchored" data-anchor-id="metadata"><span style="colour:grey">6.4</span> Metadata</h2>
 <p>We are not quite happy with the long book titles in the King James Bible, so we retrieve shorter versions from esv.org which will take up less space in the corpus map plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>book_titles <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"https://www.esv.org/resources/esv-global-study-bible/list-of-abbreviations"</span>) <span class="sc">%&gt;%</span></span>

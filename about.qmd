@@ -4,7 +4,6 @@ about:
   template: solana
   image-shape: rectangle
   image-width: 8em
-  image: 'images/pme.jpg'
   links:
     - icon: github
       text: Github
@@ -20,26 +19,22 @@ about:
       href: https://public.tableau.com/app/profile/zi.jun.ho/vizzes
 ---
 
-:::{#hero-heading}
-
+::: {#hero-heading}
 Hi I'm Zi Jun, a dedicated professional pursuing a Master's of IT in Business (Analytics Track) at Singapore Management University. With a bachelor's in Business and a passion for data analytics, I am currently focusing on leveraging Python and R programming to uncover insights and solve complex problems. Join me as I explore the world of visual analytics, turning data into compelling stories.
 
 You may reach me via email or we can connect with each other on LinkedIn!
 
 ## Education
 
-Singapore Management University
-Masters of IT in Business (Analytics) | January 2024 - April 2025
+Singapore Management University Masters of IT in Business (Analytics) \| January 2024 - April 2025
 
-Singapore University of Social Sciences
-Bachelor of Science (BSc)  in Business | July 2023
+Singapore University of Social Sciences Bachelor of Science (BSc) in Business \| July 2023
 
 ## Experience
 
-EM Services | Executive (Operations) | September 2022 - February 2024
+EM Services \| Executive (Operations) \| September 2022 - February 2024
 
-Align Technology | Consumer Experience Consultant | May 2021 - July 2022
-
+Align Technology \| Consumer Experience Consultant \| May 2021 - July 2022
 :::
 
 ***Thank you for dropping by!***

@@ -1,0 +1,17 @@
+---
+title: "In-class Exercise 7"
+author: "Ho Zi Jun"
+date: "June 01, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Links to Tableau Visualisations:
+
+[Calendar Heatmap](https://public.tableau.com/app/profile/zi.jun.ho/viz/CalendarHeatmap_17172205653610/CalendarHeatmap)
+
+[Visitors arrival by Month/Year](https://public.tableau.com/app/profile/zi.jun.ho/viz/Visitorarrivals_17172230785950/VisitorArrivalDashboard)

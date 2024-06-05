@@ -1,0 +1,224 @@
+---
+title: "Take-home Exercise 3: Network Data Visualisation and Analysis"
+author: "Ho Zi Jun"
+date: "June 2, 2024"
+date-modified: "last-modified"
+format:
+  html:
+    code-fold: true
+    code-summary: "The code chunk"
+    number-sections: true
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  message: false
+editor: source
+---
+
+## Overview - VAST Challenge: Mini-Challenge 3
+
+### Background
+
+Oceanus has a dynamic business landscape with frequent startups, mergers, acquisitions and investments. FishEye International monitors commercial fishing operators to prevent illegal fishing in the region's sensitive marine ecosystem. Analysts use a hybrid automated/manual process to transform company records into CatchNet: the Oceanus Knowledge Graph.
+
+Last year, SouthSeafood Express Corp was caught fishing illegally, disrupting the commercial fishing sector. FishEye aims to analyze the temporal patterns and impacts of this incident on the fishing market. The competitive nature of the market might lead some businesses to seize SouthSeafood's market share, while others may recognize the consequences of illegal fishing.
+
+## Project Objectives
+
+The project will focus on 2 out of the 4 tasks from VAST Challenge 2024: [Mini-Challenge 3](https://vast-challenge.github.io/2024/MC3.html)
+
+This study aims to develop visualisation tools that work with CatchNet to identify the people who hold influence over business networks and hold those who own nefarious companies accountable. That is especially difficult with varied and changing shareholder and ownership relationships. The tasks are:
+
+1.  **Develop a visual approach to examine inferences**. Infer how the influence of a company changes through time. Can we infer ownership or influence that a network may have?
+2.  Identify the network associated with SouthSeafood Express Corp and visualize how this network and competing businesses change as a result of their illegal fishing behavior. Which companies benefited from SouthSeafood Express Corp legal troubles? Are there other suspicious transactions that may be related to illegal fishing? Providing visual evidence for the conclusions.
+
+### Loading R packages
+
+In this hands-on exercise, **four** network data modelling and visualisation packages will be installed and launched. They are *igraph*, *tidygraph*, *ggraph* and *visNetwork*. Beside these four packages, *tidyverse*, *lubridate*, *clock* and *graphlayouts* will be installed and launched too.
+
+| Packages                                                                                                     | Description                                                                                                                                            |
+|:-----------------------------|:-----------------------------------------|
+| jsonlite                                                                                                     |                                                                                                                                                        |
+| [*tidygraph*](https://cran.r-project.org/web/packages/tidygraph/index.html)                                  | A Tidy API for Graph Manipulation                                                                                                                      |
+| [*ggraph*](https://cran.r-project.org/web/packages/ggraph/index.html)                                        | an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer           |
+| [*igraph*](https://r.igraph.org/)                                                                            | For Network Analysis and Visualization                                                                                                                 |
+| [*visNetwork*](https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html) | a R package for network visualization, using vis.js javascript library (https://visjs.org)                                                             |
+| [*tidyverse*](https://www.tidyverse.org/)                                                                    | a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs |
+| tidytext                                                                                                     |                                                                                                                                                        |
+| skimr                                                                                                        |                                                                                                                                                        |
+| DT                                                                                                           |                                                                                                                                                        |
+| [*lubridate*](https://lubridate.tidyverse.org/)                                                              | an R package specially designed to handle and wrangle time data                                                                                        |
+| plotly                                                                                                       |                                                                                                                                                        |
+| [*clock*](https://www.tidyverse.org/blog/2021/03/clock-0-1-0/)                                               | package providing a comprehensive set of tools for working with date-times                                                                             |
+| [*graphlayouts*](https://cran.r-project.org/web/packages/graphlayouts/vignettes/graphlayouts.html)           | package implements some graph layout algorithms that are not available in `igraph` or other packages                                                   |
+
+: R Packages {.striped .hover tbl-colwidths="\[25,75\]"}
+
+The code chunk:
+
+```{r}
+pacman::p_load(jsonlite, tidygraph, ggraph, igraph,
+               visNetwork, tidyverse, tidytext, skimr,
+               DT, lubridate, plotly, clock, graphlayouts)
+```
+
+## The Data
+
+In the code chunk below, fromJSON() of jsonlite package is used to import MC3.json file into the R environment.
+
+```{r}
+mc3 <- fromJSON("data/MC3/mc3.json")
+```
+
+Initially, when trying to load the mc3.json data we faced an error message regarding a NaN issue.
+
+![Error message](error.png) Hence we converted solely the NaN fields to "NaN" to curb this issue and the mc3.json file is imported successfully.
+
+```{r}
+class(mc3)
+```
+The output is called mc3. It is a large list R object. There are two data sets. One contains the nodes data and the other contains the edges (also know as link) data.
+
+## Wrangling and tidying edges
+
+In this section, we will extract and wrangle the edges object.
+
+### Extracting the edges data
+
+The code chunk below will be used to extract the *links* data.frame of *mc3* and saves it as a tibble data.frame called *mc3_edges*.
+
+```{r}
+mc3_edges <- as_tibble(mc3$links) %>%
+  distinct() #to avoid duplicate records; source,target,type if they are the same will be treated as duplicates and kept as one
+```
+
+glimpse() of dplyr will be used to reveal the structure of mc3_edges tibble data.table
+
+```{r}
+glimpse(mc3_edges)
+```
+::: callout-note
+## Identified issues from the table above
+-  columns with date data type are not in the correct format
+-  some field names(for e.g `_last_edited_by`) start with "_" and will have to be renamed to avoid unnecessary coding issues in the later part of the tasks.
+:::
+
+### Correcting the date data type
+The code chunk below uses as_datetime() of the **lubridate** package to convert fields with character date into **POSIXt** format.
+
+```{r}
+mc3_edges$"start_date" <- as_datetime(mc3_edges$start_date)
+mc3_edges$"_last_edited_date" <- as_datetime(mc3_edges$"_last_edited_date")
+mc3_edges$"_date_added" <- as_datetime(mc3_edges$"_date_added")
+mc3_edges$"end_date" <- as_datetime("mc3_edges$end_date")
+```
+Next, glimpse() function will be used to confirm if the process have been performed correctly.
+
+```{r}
+glimpse(mc3_edges)
+```
+### Changing field name
+In the code chunk below, `rename()` of **dplyr** package is used to change the following fields that start with “_”.
+
+```{r}
+mc3_edges <- mc3_edges %>%
+  rename("last_edited_by" = "_last_edited_by",
+         "last_edited_date" = "_last_edited_date",
+         "date_added" = "_date_added",
+         "raw_source" = "_raw_source",
+         "algorithm" = "_algorithm") 
+```
+
+Next, glimpse() function will be used to confirm if the process have been performed correctly.
+
+```{r}
+glimpse(mc3_edges)
+```
+
+### Splitting of words 
+
+From the screenshot below, we can see that the text in type field are not in a tidy manner.
+
+![](split.png)
+We are going to tidy the type column by creating two columns as shown below.
+
+Firstly, to split the text in type column into two columns; namely event 1 and event2
+
+```{r}
+word_list <- strsplit(mc3_edges$type, "\\.")
+```
+
+The code chunk below will be used to find the maximum number of elements in any split
+
+```{r}
+max_elements <- max(lengths(word_list))
+```
+
+The code chunk below will be used to pad shorter splits with NA values to make them all the same length.
+
+```{r}
+word_list_padded <- lapply(word_list, 
+function(x) c(x, rep(NA, max_elements - length(x))))
+```
+
+```{r}
+word_df <- do.call(rbind, word_list_padded)
+colnames(word_df) <- paste0("event", 1:max_elements)
+```
+
+Since the output above is a matrix, the code chunk below is used to convert word_df into a tibble data.frame.
+
+```{r}
+word_df <- as_tibble(word_df) %>%
+  select(event2, event3)
+class(word_df)
+```
+
+Now the extracted columns are appended back into the mc3_edges tibble data.frame
+
+```{r}
+mc3_edges <- mc3_edges %>%
+  cbind(word_df)
+```
+
+To save mc3_edges into R **rds** file format
+
+```{r}
+write_rds(mc3_edges, "data/rds/mc3_edges.rds")
+```
+
+## Wrangling and tidying nodes
+
+In this section, we will extract and wrangle the nodes object.
+
+### Extracting the nodes data
+
+The code chunk below will be used to extract the nodes data.frame of mc3 and parses it as a tibble data.frame called mc3_nodes.
+
+```{r}
+mc3_nodes <- as_tibble(mc3$nodes) %>%
+  distinct()
+```
+
+Next, glimpse() function will be used to confirm if the process have been performed correctly.
+
+```{r}
+glimpse(mc3_nodes)
+```
+
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
+Visit [Option](http://datastorm-open.github.io/visNetwork/options.html) to find out more about visOption’s argument.
+
+## Reference
+
+-   Kam, T.S. (2023). [Chapter 27: Modelling, Visualising and Analysing Network Data with R](https://r4va.netlify.app/chap27#overview)
