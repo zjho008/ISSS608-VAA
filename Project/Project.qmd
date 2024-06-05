@@ -2,4 +2,4 @@
 title: "ISSS608 Visual Analytics Project"
 ---
 
-Coming soon...
+Do check out my group's project upcoming website which is still a work in progress: [*Link coming soon*]{.underline}
