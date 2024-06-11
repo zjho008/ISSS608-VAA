@@ -9,7 +9,7 @@ execute:
   warning: false
   freeze: true
   format: html
-editor: visual
+editor: source
 ---
 
 ## [6.0]{style="colour:grey"} VAST Challenge 2024 - MC3

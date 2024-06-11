@@ -53,6 +53,8 @@ website:
             href: "In-Class_Ex/In-class_Ex06/In-class_Ex06b.html"
           - text: "In-class Exercise 7"
             href: "In-Class_Ex/In-class_Ex07/In-class_Ex07.html"
+          - text: "In-class Exercise 8"
+            href: "In-Class_Ex/In-class_Ex08/In-class_Ex08.html"
       - text: "Take-home Exercise"
         menu: 
           - text: "Take-home Exercise 1"
@@ -60,7 +62,7 @@ website:
           - text: "Take-home Exercise 2"
             href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"
           - text: "Take-home Exercise 3"
-            href: "Take-home_Ex/Take-home_Ex03"
+            href: "Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html"
 
       - text: "Visual Analytics Project"
         menu: 
@@ -80,4 +82,4 @@ format:
     toc: true
     toc-title: Table of Contents
 
-editor: visual
+editor: source

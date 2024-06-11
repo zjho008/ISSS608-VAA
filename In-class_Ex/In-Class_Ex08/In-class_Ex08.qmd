@@ -1,0 +1,20 @@
+---
+title: "In-class Exercise 8"
+author: "Ho Zi Jun"
+date: "June 08, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Links to Tableau Visualisations:
+
+[REALIS Data Dashboard](https://public.tableau.com/app/profile/zi.jun.ho/viz/RealisDashboard/Dashboard)
+
+[SGPools_svy21: Svy21_ProjectedCoordianteSystem aspatial data exploration](https://public.tableau.com/app/profile/zi.jun.ho/viz/AspatialDataExploration/ExplorationofaspatialdataSvy21ProjectedCoordinateSystem)
+
+[SGPools_wgs84 Choropleth Map - ](https://public.tableau.com/app/profile/zi.jun.ho/viz/Choroplethmap_17180787757680/ChoroplethMapOutletBranchlocations)
+

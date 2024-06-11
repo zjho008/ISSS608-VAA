@@ -1,13 +1,15 @@
 ---
 title: "Take-home Exercise 3: Network Data Visualisation and Analysis"
 author: "Ho Zi Jun"
-date: "June 2, 2024"
+date: "June 9, 2024"
 date-modified: "last-modified"
 format:
   html:
-    code-fold: true
+    code-fold: show
     code-summary: "The code chunk"
     number-sections: true
+    mermaid: 
+      theme: neutral
 execute:
   eval: true
   echo: true
@@ -17,59 +19,104 @@ execute:
 editor: source
 ---
 
-## Overview - VAST Challenge: Mini-Challenge 3
+## VAST Challenge: Mini-Challenge 3
 
-### Background
+### Background and Overview
 
-Oceanus has a dynamic business landscape with frequent startups, mergers, acquisitions and investments. FishEye International monitors commercial fishing operators to prevent illegal fishing in the region's sensitive marine ecosystem. Analysts use a hybrid automated/manual process to transform company records into CatchNet: the Oceanus Knowledge Graph.
+Oceanus has a dynamic business landscape with frequent startups, mergers, acquisitions and investments. FishEye International, a non-profit organization that focuses on illegal fishing monitors commercial fishing operators to prevent illegal fishing in the region's sensitive marine ecosystem. Analysts use a hybrid automated/manual process to transform company records into CatchNet: the Oceanus Knowledge Graph.
 
-Last year, SouthSeafood Express Corp was caught fishing illegally, disrupting the commercial fishing sector. FishEye aims to analyze the temporal patterns and impacts of this incident on the fishing market. The competitive nature of the market might lead some businesses to seize SouthSeafood's market share, while others may recognize the consequences of illegal fishing.
+Last year, SouthSeafood Express Corp was caught fishing illegally, disrupting the commercial fishing sector. FishEye aims to analyse the temporal patterns and impacts of this incident on the fishing market. The competitive nature of the market might lead some businesses attempting to seize SouthSeafood's market share, while others may recognize the consequences of illegal fishing.
 
 ## Project Objectives
 
-The project will focus on 2 out of the 4 tasks from VAST Challenge 2024: [Mini-Challenge 3](https://vast-challenge.github.io/2024/MC3.html)
+The project will focus on 2 out of the 4 tasks (**Questions 3 and 4**) from VAST Challenge 2024: [Mini-Challenge 3](https://vast-challenge.github.io/2024/MC3.html)
 
-This study aims to develop visualisation tools that work with CatchNet to identify the people who hold influence over business networks and hold those who own nefarious companies accountable. That is especially difficult with varied and changing shareholder and ownership relationships. The tasks are:
+This project aims to develop visualisation tools that work with CatchNet to identify the people who hold influence over business networks and hold those who own nefarious companies accountable. That is especially difficult with varied and changing shareholder and ownership relationships. The tasks are:
 
-1.  **Develop a visual approach to examine inferences**. Infer how the influence of a company changes through time. Can we infer ownership or influence that a network may have?
-2.  Identify the network associated with SouthSeafood Express Corp and visualize how this network and competing businesses change as a result of their illegal fishing behavior. Which companies benefited from SouthSeafood Express Corp legal troubles? Are there other suspicious transactions that may be related to illegal fishing? Providing visual evidence for the conclusions.
+> 3.  **Develop a visual approach to examine inferences**. Infer how the influence of a company changes through time. Can we infer ownership or influence that a network may have?
 
-### Loading R packages
+> 4.  **Identify the network associated with SouthSeafood Express Corp** and visualize how this network and competing businesses change as a result of their illegal fishing behavior. Which companies [benefited from SouthSeafood Express Corp legal troubles]{.underline}? Are there [other suspicious transactions]{.underline} that may be related to illegal fishing? Providing visual evidence for the conclusions.
 
-In this hands-on exercise, **four** network data modelling and visualisation packages will be installed and launched. They are *igraph*, *tidygraph*, *ggraph* and *visNetwork*. Beside these four packages, *tidyverse*, *lubridate*, *clock* and *graphlayouts* will be installed and launched too.
+Note: the VAST challenge is focused on visual analytics and graphical figures should be included with your response to each question. Please include a reasonable number of figures for each question (no more than about 6) and keep written responses as brief as possible (around 250 words per question). Participants are encouraged to new visual representations rather than relying on traditional or existing approaches.
 
-| Packages                                                                                                     | Description                                                                                                                                            |
-|:-----------------------------|:-----------------------------------------|
-| jsonlite                                                                                                     |                                                                                                                                                        |
-| [*tidygraph*](https://cran.r-project.org/web/packages/tidygraph/index.html)                                  | A Tidy API for Graph Manipulation                                                                                                                      |
-| [*ggraph*](https://cran.r-project.org/web/packages/ggraph/index.html)                                        | an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer           |
-| [*igraph*](https://r.igraph.org/)                                                                            | For Network Analysis and Visualization                                                                                                                 |
-| [*visNetwork*](https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html) | a R package for network visualization, using vis.js javascript library (https://visjs.org)                                                             |
-| [*tidyverse*](https://www.tidyverse.org/)                                                                    | a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs |
-| tidytext                                                                                                     |                                                                                                                                                        |
-| skimr                                                                                                        |                                                                                                                                                        |
-| DT                                                                                                           |                                                                                                                                                        |
-| [*lubridate*](https://lubridate.tidyverse.org/)                                                              | an R package specially designed to handle and wrangle time data                                                                                        |
-| plotly                                                                                                       |                                                                                                                                                        |
-| [*clock*](https://www.tidyverse.org/blog/2021/03/clock-0-1-0/)                                               | package providing a comprehensive set of tools for working with date-times                                                                             |
-| [*graphlayouts*](https://cran.r-project.org/web/packages/graphlayouts/vignettes/graphlayouts.html)           | package implements some graph layout algorithms that are not available in `igraph` or other packages                                                   |
+## Hypothesis and Methodology
 
-: R Packages {.striped .hover tbl-colwidths="\[25,75\]"}
+For these questions, we would have to investigate the changes through time in multiple areas mainly:
+
+1.  Individual's ownership and influence on a network for the first portion
+2.  Following which, how the networks and companies changes as a result of the SouthSeafood Express Corp incident.
+
+To achieve this we will attempt to create visualisations of network graphs and carrying out faceting to allow us to observe for patterns and trends and make our inferences.
+
+```{mermaid}
+%%| echo: false
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#d8e8e6",
+      "primaryTextColor": "#325985",
+      "primaryBorderColor": "#325985",
+      "lineColor": "#325985",
+      "secondaryColor": "#cedded",
+      "tertiaryColor": "#fff" 
+      }
+  }
+}%%
+
+flowchart LR
+    A[Person / CEO] -->|Ownership\n OR \nInfluence| B(Organisation)
+    B ---> C{Company}
+    B ---> D{FishingCompany}
+    B ---> E{LogisticsCompany}
+    B ---> F{NewsCompany}
+    B ---> G{FinancialCompany}
+    B ---> H{NGO}
+```
+
+```{mermaid}
+%%| echo: false
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#d8e8e6",
+      "primaryTextColor": "#325985",
+      "primaryBorderColor": "#325985",
+      "lineColor": "#325985",
+      "secondaryColor": "#cedded",
+      "tertiaryColor": "#fff" 
+      }
+  }
+}%%
+   
+flowchart LR
+  A[Companies] --> |BENEFITED| B(SouthSeafood Express Corp)
+  C{Suspicious\nTranscations}
+  C --> A
+  C --> E[Illegal Fishing]
+```
+
+## Getting Started
+
+### Installing and launching R packages
+
+In the code chunk below, `p_load()` of pacman package is used to check if the following packages have been installed and also will load them into the working R environment.
 
 The code chunk:
 
 ```{r}
-pacman::p_load(jsonlite, tidygraph, ggraph, igraph,
-               visNetwork, tidyverse, tidytext, skimr,
-               DT, lubridate, plotly, clock, graphlayouts)
+pacman::p_load(jsonlite, tidygraph, ggraph, visNetwork, knitr,
+               graphlayouts, ggforce, tidyverse, tidytext, RColorBrewer,
+               skimr, DT, lubridate, plotly, clock, igraph)
 ```
 
-## The Data
+### The Data
 
-In the code chunk below, fromJSON() of jsonlite package is used to import MC3.json file into the R environment.
+In the code chunk below, `fromJSON()` of jsonlite package is used to import MC3.json file into the R environment.
 
 ```{r}
-mc3 <- fromJSON("data/MC3/mc3.json")
+mc3_data <- fromJSON("data/MC3/mc3.json")
 ```
 
 Initially, when trying to load the mc3.json data we faced an error message regarding a NaN issue.
@@ -77,147 +124,517 @@ Initially, when trying to load the mc3.json data we faced an error message regar
 ![Error message](error.png) Hence we converted solely the NaN fields to "NaN" to curb this issue and the mc3.json file is imported successfully.
 
 ```{r}
-class(mc3)
+class(mc3_data)
 ```
-The output is called mc3. It is a large list R object. There are two data sets. One contains the nodes data and the other contains the edges (also know as link) data.
 
-## Wrangling and tidying edges
+The output is called mc3_data. It is a large list R object. There are two data frames. One contains the nodes data and the other contains the edges (also know as link) data.
 
-In this section, we will extract and wrangle the edges object.
+## Data Wrangling
 
-### Extracting the edges data
+In order to improve the data quality and make it more consumable and useful for analytics, we will proceed with data wrangling to transform and structure the raw data form into specific desired formats
 
-The code chunk below will be used to extract the *links* data.frame of *mc3* and saves it as a tibble data.frame called *mc3_edges*.
+### Extracting the **edges** data
+
+In this section, we will extract and wrangle the edges object. The edges form the relationship or link between different nodes.
+
+::: panel-tabset
+### **edges**
+
+The code chunk below will be used to extract the *links* data.frame of *mc3_data* and saves it as a tibble data.frame called *mc3_edges*.
 
 ```{r}
-mc3_edges <- as_tibble(mc3$links) %>%
-  distinct() #to avoid duplicate records; source,target,type if they are the same will be treated as duplicates and kept as one
+mc3_edges <- as_tibble(mc3_data$links) %>% 
+  unnest(source) %>% 
+  distinct()
 ```
 
-glimpse() of dplyr will be used to reveal the structure of mc3_edges tibble data.table
+`glimpse()` of dplyr will be used to reveal the structure of mc3_edges_raw tibble data.table
 
 ```{r}
 glimpse(mc3_edges)
 ```
 ::: callout-note
-## Identified issues from the table above
--  columns with date data type are not in the correct format
--  some field names(for e.g `_last_edited_by`) start with "_" and will have to be renamed to avoid unnecessary coding issues in the later part of the tasks.
+The following issues can be identified from the table above:
+
+-   columns with date data type are not in the correct format
+-   some field names(for e.g `_last_edited_by`, `_date_added`) start with "\_" and will have to be renamed to avoid unnecessary coding issues in the later part of the tasks.
 :::
 
-### Correcting the date data type
-The code chunk below uses as_datetime() of the **lubridate** package to convert fields with character date into **POSIXt** format.
+### Correcting and filtering the edges data
 
 ```{r}
-mc3_edges$"start_date" <- as_datetime(mc3_edges$start_date)
-mc3_edges$"_last_edited_date" <- as_datetime(mc3_edges$"_last_edited_date")
-mc3_edges$"_date_added" <- as_datetime(mc3_edges$"_date_added")
-mc3_edges$"end_date" <- as_datetime("mc3_edges$end_date")
-```
-Next, glimpse() function will be used to confirm if the process have been performed correctly.
-
-```{r}
-glimpse(mc3_edges)
-```
-### Changing field name
-In the code chunk below, `rename()` of **dplyr** package is used to change the following fields that start with “_”.
-
-```{r}
-mc3_edges <- mc3_edges %>%
+mc3_edges <- as_tibble(mc3_data$links) %>% 
+  unnest(source) %>% 
+  distinct() %>% #used to avoid duplicate records; if they are the same will be treated as duplicates and kept as one
   rename("last_edited_by" = "_last_edited_by",
          "last_edited_date" = "_last_edited_date",
          "date_added" = "_date_added",
          "raw_source" = "_raw_source",
-         "algorithm" = "_algorithm") 
+         "algorithm" = "_algorithm") %>% 
+  mutate(source = as.character(source),
+         target = as.character(target),
+         type = as.character(type),
+         type_new = stringr::str_extract(type, "[^.]+$"),
+         startdate = as_datetime(start_date)) %>% 
+  group_by(source, target, type_new, startdate) %>% 
+  summarise(weights = n()) %>% 
+  filter(source != target) %>%
+  ungroup()
+
+head(mc3_edges)
 ```
 
-Next, glimpse() function will be used to confirm if the process have been performed correctly.
+::: callout-note
+-  The code chunk above uses `as_datetime()` of the **lubridate** package to convert fields with character date into **POSIXt** format.
+-  In the code chunk above, `rename()` of **dplyr** package is used to change the following fields that start with “\_”.
+:::
+
+### Selecting the columns
+
+The following variables have been selected for our analysis:
+
+-   `source` - to identify the *actor* of the relationship, corresponds to `id` in nodes.
+
+-   `target` - to identify the *receiver* of the relationship, corresponds to `id` in nodes.
+
+-   `type` - to identify the type(edge - 3 types) of the relationship
+
+-   `start_date` - to identify date at which the event began
+
+
+To help us better understand the 3 distinct types that are present under **mc3_edges** the `unique()` function is used:
 
 ```{r}
-glimpse(mc3_edges)
+mc3_edges$type_new %>% unique()
 ```
+:::
 
-### Splitting of words 
+A plot is generated to provide some exploratory analysis, particularly for the type field. We can observe that there are four types of edges. It is important to note that for FamilyRelationship edges only has *type* attributes as stated in the VAST 2024 - MC3 Data Description.
 
-From the screenshot below, we can see that the text in type field are not in a tidy manner.
+```{r, fig.width=10}
+ggplot(data = mc3_edges, aes(x = type_new)) +
+  geom_bar()
+```
+#### Extracting the **nodes** data
 
-![](split.png)
-We are going to tidy the type column by creating two columns as shown below.
+In this section, we will extract and wrangle the nodes object. The nodes form either the organisation/individual in the network.
 
-Firstly, to split the text in type column into two columns; namely event 1 and event2
+::: panel-tabset
+### **Nodes**
+
+The code chunk below will be used to extract the **nodes** data.frame of **mc3_data** and parses it as a tibble data.frame called **mc3_nodes_raw**.
 
 ```{r}
-word_list <- strsplit(mc3_edges$type, "\\.")
+mc3_nodes <- as_tibble(mc3_data$nodes) %>%
+  distinct() # applied distinct() to remove duplicate node records
 ```
 
-The code chunk below will be used to find the maximum number of elements in any split
-
-```{r}
-max_elements <- max(lengths(word_list))
-```
-
-The code chunk below will be used to pad shorter splits with NA values to make them all the same length.
-
-```{r}
-word_list_padded <- lapply(word_list, 
-function(x) c(x, rep(NA, max_elements - length(x))))
-```
-
-```{r}
-word_df <- do.call(rbind, word_list_padded)
-colnames(word_df) <- paste0("event", 1:max_elements)
-```
-
-Since the output above is a matrix, the code chunk below is used to convert word_df into a tibble data.frame.
-
-```{r}
-word_df <- as_tibble(word_df) %>%
-  select(event2, event3)
-class(word_df)
-```
-
-Now the extracted columns are appended back into the mc3_edges tibble data.frame
-
-```{r}
-mc3_edges <- mc3_edges %>%
-  cbind(word_df)
-```
-
-To save mc3_edges into R **rds** file format
-
-```{r}
-write_rds(mc3_edges, "data/rds/mc3_edges.rds")
-```
-
-## Wrangling and tidying nodes
-
-In this section, we will extract and wrangle the nodes object.
-
-### Extracting the nodes data
-
-The code chunk below will be used to extract the nodes data.frame of mc3 and parses it as a tibble data.frame called mc3_nodes.
-
-```{r}
-mc3_nodes <- as_tibble(mc3$nodes) %>%
-  distinct()
-```
-
-Next, glimpse() function will be used to confirm if the process have been performed correctly.
+`glimpse()` of dplyr will be used to reveal the structure of mc3_nodes_raw tibble data.table
 
 ```{r}
 glimpse(mc3_nodes)
 ```
 
+::: callout-note
+From the table above, the date data type and inappropriate field name issues as faced earlier are also present:
 
-```{mermaid}
-flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
+-   columns with date data type are not in the correct format
+-   some field names(for e.g `_last_edited_by`, `_date_added`) start with "\_" and will have to be renamed to avoid unnecessary coding issues in the later part of the tasks.
+:::
+
+### Correcting and filtering the nodes data
+
+```{r}
+# extract all nodes from graph
+mc3_nodes <- as_tibble(mc3_data$nodes) %>% 
+  mutate(id = as.character(id),
+         revenue = as.numeric(as.character(revenue)),
+         type = ifelse(type == "Entity.Person", "Entity.Person.Person", type)) %>%
+  select(id, type, revenue)
+
+# extract all nodes from edges
+id1 <- mc3_edges %>%
+  select(source, type_new) %>%
+  rename(id = source) %>% 
+  mutate(revenue = NA) %>% 
+  select(id, type_new, revenue)
+
+id2 <- mc3_edges %>%
+  select(target, type_new) %>%
+  rename(id = target) %>% 
+  mutate(revenue = NA) %>% 
+  select(id, type_new, revenue)
+
+additional_nodes <- rbind(id1, id2) %>% 
+  distinct %>% 
+  filter(!id %in% mc3_nodes[["id"]])
+
+# combine all nodes
+mc3_nodes_updated <- rbind(mc3_nodes, additional_nodes) %>%
+  distinct()
+
+head(mc3_nodes_updated)
+```
+### Selecting the columns
+
+Similarly, the relevant variables are selected for analysis:
+
+-   `id` - the unique identifier of the node and the name of the person or organisation
+
+-   `type` - to identify either the person or company from the entity
+
+-  `revenue` - the last reported annual revenue for the company in local currency; (all empty values have been set to 0)
+
+
+To help us better understand the multiple distinct types that are present under **mc3_nodes** the `unique()` function is used:
+
+```{r}
+mc3_nodes_updated$type %>% unique()
 ```
 
-Visit [Option](http://datastorm-open.github.io/visNetwork/options.html) to find out more about visOption’s argument.
+
+::: callout-note
+-  to convert *revenue* from *dbl* data type to numeric data type, the values were first converted into character first by using `as.character()` followed by `as.numeric()` to convert the data into numeric data type.
+-   `select()` is used to re-organise the order of the fields.
+:::
+
+```{r}
+# The fields are joined together for the `type` column we will further process by separating the fields
+mc3_nodes_updated <- mc3_nodes_updated %>%
+  separate(type, into = c("type_1", "type_2", "type_3"), sep = "\\.", fill = "right", extra = "drop")
+
+# Displayikng rows of the updated dataframe
+head(mc3_nodes_updated)
+```
+#### Type 2 Nodes
+```{r}
+mc3_nodes_updated$type_2 %>% unique()
+```
+
+#### Type 3 Nodes
+
+```{r}
+mc3_nodes_updated$type_3 %>% unique()
+```
+:::
+To further examine the nodes, the plot generated particularly from the type field allows us to see that there are six organisation nodes and two person nodes.
+
+```{r, fig.width=12}
+ggplot(data = mc3_nodes_updated, aes(x = type_3)) +
+  geom_bar()
+```
+
+## Preparing network objects to build the graph
+
+### Checking for duplicates under nodes
+```{r}
+mc3_nodes_updated[duplicated(mc3_nodes_updated$id),] %>% 
+  arrange(id)
+```
+The results show that there are no duplicates under nodes.
+
+
+## Network Graph
+
+## Visual Analysis of ownership or influence changes in a network
+
+We will first start of by identifying the node with highest betweenness centrality within the entire the network graph. Centrality measures are a collection of statistical indices used to describe the relative importance the actors are to a network.For this case, being the persons with links to the entities.
+
+A node with high betweenness centrality will be shown and has linkages in different parts of the graph. In this context, it may be an indication of an entity that is beneficial owner or shareholder of many different companies or an entity that is used by an individual or CEO to link to different groups of companies.
+
+The node with highest betweenness centrality in this case is identified to be Wave Warriors S.A. de C.V. Express. We will extract the first-degree and second-degree links to Wave Warriors S.A. de C.V. Express and visualise the interactive network chart below.
+
+```{r}
+#| code-fold: true
+# form graph
+mc3_graph <- tbl_graph(nodes = mc3_nodes_updated,
+                       edges = mc3_edges,
+                       directed = FALSE) %>% 
+  mutate(betweenness_centrality = centrality_betweenness())
+
+# extract node with highest betweenness centrality
+top1_betw <- mc3_graph %>% 
+  activate(nodes) %>% 
+  as_tibble() %>% 
+  top_n(1, betweenness_centrality) %>% 
+    select(id, type_3)
+
+# extract lvl 1 edges
+top1_betw_edges_lvl1 <- mc3_edges %>% 
+  filter(source %in% top1_betw[["id"]] | target %in% top1_betw[["id"]])
+
+# extract nodes from lvl 1 edges
+id1 <- top1_betw_edges_lvl1 %>%
+  select(source) %>%
+  rename(id = source) %>% 
+  left_join(mc3_nodes_updated, by = "id") %>% 
+  select(id, type_3)
+
+id2 <- top1_betw_edges_lvl1 %>%
+  select(target) %>%
+  rename(id = target) %>% 
+  left_join(mc3_nodes_updated, by = "id") %>% 
+  select(id, type_3)
+
+additional_nodes_lvl1 <- rbind(id1, id2) %>% 
+  distinct %>% 
+  filter(!id %in% top1_betw[["id"]])
+
+# extract lvl 2 edges
+top1_betw_edges_lvl2 <- mc3_edges %>% 
+  filter(source %in% additional_nodes_lvl1[["id"]] | target %in% additional_nodes_lvl1[["id"]])
+
+# extract nodes from lvl 1 edges
+id1 <- top1_betw_edges_lvl2 %>%
+  select(source) %>%
+  rename(id = source) %>% 
+  left_join(mc3_nodes_updated, by = "id") %>% 
+  select(id, type_3)
+
+id2 <- top1_betw_edges_lvl2 %>%
+  select(target) %>%
+  rename(id = target) %>% 
+  left_join(mc3_nodes_updated, by = "id") %>% 
+  select(id, type_3)
+
+additional_nodes_lvl2 <- rbind(id1, id2) %>% 
+  distinct %>% 
+  filter(!id %in% top1_betw[["id"]] & !id %in% additional_nodes_lvl1[["id"]])
+
+# combine all nodes
+top1_betw_nodes <- rbind(top1_betw, additional_nodes_lvl1, additional_nodes_lvl2) %>%
+  distinct()
+
+# combine all edges
+top1_betw_edges <- rbind(top1_betw_edges_lvl1, top1_betw_edges_lvl2) %>% 
+  distinct()
+
+# colur palatte for betweenness centrality colours
+sw_colors <- colorRampPalette(brewer.pal(3, "RdBu"))(3)
+
+# customise edges for plotting
+top1_betw_edges <- top1_betw_edges %>% 
+  rename(from = source,
+         to = target) %>% 
+  mutate(title = paste0("Type: ", type_new), # tooltip when hover over
+         color = "#0085AF") # color of edge
+
+# customise nodes for plotting
+top1_betw_nodes <- top1_betw_nodes %>% 
+  rename(group = type_3) %>% 
+  mutate(id.type = ifelse(id == top1_betw[["id"]], sw_colors[1], sw_colors[2])) %>%
+  mutate(title = paste0(id, "<br>Group: ", group), # tooltip when hover over
+         size = 30, # set size of nodes
+         color.border = "#013848", # border colour of nodes
+         color.background = id.type, # background colour of nodes
+         color.highlight.background = "#FF8000" # background colour of nodes when highlighted
+         )
+
+# plot graph
+visNetwork(top1_betw_nodes, top1_betw_edges,
+           height = "500px", width = "100%",
+           main = paste0("Network Graph of ", top1_betw[["id"]])) %>%
+  visIgraphLayout() %>%
+  visGroups(groupname = "Company", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO, Person", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO, Person, CEO", shape = "triangle") %>%
+  visOptions(selectedBy = "group",
+             highlightNearest = list(enabled = T, degree = 1, hover = T),
+             nodesIdSelection = TRUE) %>% 
+  visLayout(randomSeed = 123)
+```
+
+Sharon Moon is an individual person who is linked to multiple companies from beneficial ownerships. It is also observed that for those companies there are further multiple layers of beneficial ownership with other individuals. For example, we can see that Sharon Moon is a beneficial owner of Wells, Morales and Gallagfher and in turn is a shareholder company of Meyer-Gilbert.
+
+Such behaviour of ownership layering is an anomaly as it could potentially be an attempt to obscure the ownership structure and make it challenging to trace the true ownership.
+
+
+#### Perform analysis on largest components in the network: 
+
+```{r}
+# form graph
+mc3_graph <- tbl_graph(nodes = mc3_nodes_updated,
+                       edges = mc3_edges,
+                       directed = FALSE)
+
+# find components in graph
+set.seed(123)
+clusters <- components(mc3_graph)
+
+# update graph with component membership
+mc3_nodes_updated <- mc3_nodes_updated %>% 
+  mutate(component_membership = clusters$membership)
+
+# extract info relating to components
+component_df <- clusters$csize %>% 
+  as_tibble() %>% 
+  rownames_to_column() %>% 
+  rename(component_membership = rowname,
+         component_size = value)
+
+# find components that are top 3 in size    
+top_3_components <- component_df %>% 
+  top_n(3, component_size) %>% 
+  arrange(desc(component_size))
+
+datatable(top_3_components)
+```
+
+Next, we will visualise the network charts of the three largest clusters separately using interactive charts below.
+
+```{r}
+visualise_cluster <- function(x){
+  
+# extract nodes in component
+component_nodes <- mc3_nodes_updated %>%
+  filter(component_membership == x)
+
+# extract edges in component
+component_edges <- mc3_edges %>% 
+  filter(source %in% component_nodes[["id"]] | target %in% component_nodes[["id"]])
+
+# compute centrality measures
+component_graph <- tbl_graph(nodes = component_nodes,
+                             edges = component_edges,
+                             directed = FALSE) %>% 
+  mutate(closeness_centrality = centrality_closeness(),
+         betweenness_centrality = centrality_betweenness(),
+         eigen_cetrality = centrality_eigen())
+
+# compute the top 90th percentile centrality
+component_nodes_updated <- component_graph %>% 
+  activate(nodes) %>% 
+  as_tibble()
+
+cent_per_90 <- quantile(component_nodes_updated$betweenness_centrality,
+                               probs = 0.90)
+
+component_nodes_updated <- component_nodes_updated %>% 
+  mutate(is_top_cent_90 = ifelse(betweenness_centrality >= cent_per_90, "yes", "no"))
+
+# colur palatte for betweenness centrality colours
+sw_colors <- colorRampPalette(brewer.pal(3, "RdBu"))(3)
+
+# customise edges for plotting
+component_edges <- component_edges %>% 
+  rename(from = source,
+         to = target) %>% 
+  mutate(title = paste0("Type: ", type_new), # tooltip when hover over
+         color = "#0085AF") # color of edge
+
+# customise nodes for plotting
+component_nodes_updated <- component_nodes_updated %>% 
+  rename(group = type_3) %>% 
+  mutate(is_top_cent_90.type = ifelse(is_top_cent_90 == "yes", sw_colors[1], sw_colors[2])) %>% 
+  mutate(title = paste0(id, "<br>Group: ", group), # tooltip when hover over
+         size = 40, # set size of nodes
+         color.border = "#013848", # border colour of nodes
+         color.background = is_top_cent_90.type, # background colour of nodes
+         color.highlight.background = "#FF8000" # background colour of nodes when highlighted
+         )
+
+# plot graph
+visNetwork(component_nodes_updated, component_edges,
+           height = "500px", width = "100%",
+           main = paste0("Entities in Component ", x)) %>%
+  visIgraphLayout() %>%
+  visGroups(groupname = "Company", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO, Person", shape = "triangle") %>%
+  visGroups(groupname = "Company, LogisticsCompany, FishingCompany, FinancialCompany, NewsCompany, NGO, Person, CEO", shape = "triangle") %>%
+  visOptions(selectedBy = "group",
+             highlightNearest = list(enabled = T, degree = 1, hover = T),
+             nodesIdSelection = TRUE) %>% 
+  visLayout(randomSeed = 123)
+
+}
+
+visualise_cluster(1)
+```
+
+```{r}
+visualise_cluster(504)
+```
+
+
+## Preparing network objects to build the graph
+
+::: panel-tabset
+## **Edges**
+The code chunk below will be used to perform the changes to further reformat *mc3_edges* data frame
+
+```{r}
+mc3_edges_aggregated <- mc3_edges %>%
+  rename(from = source, to = target, ) %>%
+  mutate(
+    status = ifelse(
+      grepl("Event.Owns", type),
+      "Ownership",
+      ifelse(grepl("Relationship", type), "Relationship", "Employment")
+    ),
+    subtype = strsplit(type, ".", fixed = TRUE) %>% sapply(tail, n = 1),
+    StartDate = date(start_date),
+    Month = month(start_date, label = TRUE),
+    Year = year(start_date)
+  ) %>%
+  filter(from != to) %>%
+  group_by(from, to, status, subtype, StartDate, Month, Year) %>%
+  summarize(weight = n())
+
+kable(head(mc3_edges_aggregated))
+```
+Next, `summarise()` function will be used to confirm if type has been mapped correctly. 
+
+```{r}
+mc3_edges_aggregated %>%
+  group_by(status, subtype) %>%
+  summarize(count = n()) %>%
+  kable()
+```
+
+## **Nodes**
+The code chunk below will be used to perform the changes to further reformat *mc3_nodes* data frame
+
+```{r}
+mc3_nodes_aggregated <- mc3_nodes %>%
+  mutate(
+    name = id,
+    status = strsplit(type, ".", fixed=TRUE) %>% sapply('[', 2),
+    # Get the last type as status. In the case of Entity.Person,
+    # both status and subtype are "Person".
+    subtype = strsplit(type, ".", fixed=TRUE) %>% sapply(tail, n=1),
+    country = as.character(country),
+    product_services = as.character(ProductServices),
+    revenue = as.numeric(as.character(revenue))
+  ) %>%
+  select(name, status, subtype, country, product_services, revenue)
+
+kable(head(mc3_nodes_aggregated))
+```
+Next, `summarise()` function will be used to confirm if type has been mapped correctly. 
+
+```{r}
+mc3_nodes_aggregated %>%
+  group_by(status, subtype) %>%
+  summarize(count = n()) %>%
+  kable()
+```
+:::
+
+## Building network model with tidygraph
+
+### To construct the graph model using tbl_graph object
+
+
 
 ## Reference
 

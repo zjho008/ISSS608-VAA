@@ -50,7 +50,7 @@ Notice that, we only need to install **tidyverse** instead of **readr**, **tidyr
 
 ### The Data
 
-Two data setws will be used to create the choropleth map. They are:
+Two data sets will be used to create the choropleth map. They are:
 
 -   Master Plan 2014 Subzone Boundary (Web) (i.e.`MP14_SUBZONE_WEB_PL`) in ESRI shapefile format. It can be downloaded at [data.gov.sg](https://data.gov.sg/) This is a geospatial data. It consists of the geographical boundary of Singapore at the planning subzone level. The data is based on the URA Master Plan 2014.
 
