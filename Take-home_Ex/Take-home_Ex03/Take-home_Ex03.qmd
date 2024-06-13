@@ -143,8 +143,7 @@ In this section, we will extract and wrangle the edges object. The edges form th
 The code chunk below will be used to extract the *links* data.frame of *mc3_data* and saves it as a tibble data.frame called *mc3_edges*.
 
 ```{r}
-mc3_edges <- as_tibble(mc3_data$links) %>% 
-  unnest(source) %>% 
+mc3_edges <- as_tibble(mc3_data$links) %>%
   distinct()
 ```
 
