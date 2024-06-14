@@ -94,6 +94,6 @@ format:
     toc-depth: 4
     grid: 
       sidebar-width: 150px
-      margin-width: 350px
+      margin-width: 300px
 
 editor: source
