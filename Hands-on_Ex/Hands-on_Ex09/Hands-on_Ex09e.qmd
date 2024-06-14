@@ -1,0 +1,65 @@
+---
+title: "Hands-on Exercise 9e: Treemap Visualisation with R"
+author: "Ho Zi Jun"
+date: "June 15, 2024"
+date-modified: "last-modified"
+format: 
+  html:
+    number-sections: true
+    code-fold: false
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  message: false
+editor: source
+---
+
+## Overview
+
+In this hands-on exercise, we will gain hands-on experiences on designing treemap using appropriate R packages. The hands-on exercise consists of three main sections. Firstly, we will learn how to manipulate transaction data into a treemap strcuture by using selected functions provided in **dplyr** package. Then, we will learn how to plot static treemap by using **treemap** package. In the third section, we will learn how to design interactive treemap by using **d3treeR** package.
+
+## Installing and Launching R Packages
+
+## Data Wrangling
+
+### Importing the data set
+
+### Data Wrangling and Manipulation
+
+### Grouped summaries without the Pipe
+
+### Grouped summaries with the pipe
+
+## Designing Treemap with treemap Package
+
+### Designing a static treemap
+
+### Using the basic arguments
+
+### Working with *vColor* and type arguments
+
+### Colours in treemap package
+
+### The “value” type treemap
+
+### The “manual” type treemap
+
+### Treemap Layout
+
+### Working with *algorithm* argument
+
+### Using *sortID*
+
+## Designing Treemap using **treemapify** Package
+
+### Designing a basic treemap
+
+### Defining hierarchy
+
+## Designing Interactive Treemap using **d3treeR**
+
+### Installing *d3treeR* package
+
+### Designing An Interactive Treemap

@@ -91,8 +91,9 @@ format:
     css: styles.css
     toc: true
     toc-title: Table of Contents
+    toc-depth: 4
     grid: 
       sidebar-width: 150px
-      margin-width: 300px
+      margin-width: 350px
 
 editor: source

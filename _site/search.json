@@ -1047,7 +1047,7 @@
     "href": "index.html",
     "title": "ISSS608 Visual Analytics and Applications Homepage",
     "section": "",
-    "text": "Hey there! Welcome to my Visual Analytics and Applications page which documents and showcase my coursework and projects for this module.\nFrom here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to “detect the expected and discover the unexpected”.\n\nA Feature of My Latest Works:\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 1\n\n\n\n\n\n\nHo Zi Jun\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9a: Creating Ternary Plot with R\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9b: Visual Correlation Analysis\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9c: Heatmap for Visualising and Analysing Multivariate Data\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9d: Visual Multivariate Analysis with Parallel Coordinates Plot\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nTake-home Exercise 3: Network Data Visualisation and Analysis\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 9, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Hey there! Welcome to my Visual Analytics and Applications page which documents and showcase my coursework and projects for this module.\nFrom here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to “detect the expected and discover the unexpected”.\n\nA Feature of My Latest Works:\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 1\n\n\n\n\n\n\nHo Zi Jun\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9a: Creating Ternary Plot with R\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9b: Visual Correlation Analysis\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9c: Heatmap for Visualising and Analysing Multivariate Data\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9d: Visual Multivariate Analysis with Parallel Coordinates Plot\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on Exercise 9e: Treemap Visualisation with R\n\n\n\n\n\n\nHo Zi Jun\n\n\nJun 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Project/Project.html",
@@ -1559,5 +1559,54 @@
     "title": "Hands-on Exercise 9d: Visual Multivariate Analysis with Parallel Coordinates Plot",
     "section": "6 References",
     "text": "6 References\n\nggparcoord() of GGally package\nparcoords user guide\nparallelPlot"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "",
+    "text": "In this hands-on exercise, we will gain hands-on experiences on designing treemap using appropriate R packages. The hands-on exercise consists of three main sections. Firstly, we will learn how to manipulate transaction data into a treemap strcuture by using selected functions provided in dplyr package. Then, we will learn how to plot static treemap by using treemap package. In the third section, we will learn how to design interactive treemap by using d3treeR package."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#overview",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#overview",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "",
+    "text": "In this hands-on exercise, we will gain hands-on experiences on designing treemap using appropriate R packages. The hands-on exercise consists of three main sections. Firstly, we will learn how to manipulate transaction data into a treemap strcuture by using selected functions provided in dplyr package. Then, we will learn how to plot static treemap by using treemap package. In the third section, we will learn how to design interactive treemap by using d3treeR package."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#installing-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#installing-and-launching-r-packages",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "2 Installing and Launching R Packages",
+    "text": "2 Installing and Launching R Packages"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#data-wrangling",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#data-wrangling",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "3 Data Wrangling",
+    "text": "3 Data Wrangling\n\n3.1 Importing the data set\n\n\n3.2 Data Wrangling and Manipulation\n\n\n3.3 Grouped summaries without the Pipe\n\n\n3.4 Grouped summaries with the pipe"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-treemap-with-treemap-package",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-treemap-with-treemap-package",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "4 Designing Treemap with treemap Package",
+    "text": "4 Designing Treemap with treemap Package\n\n4.1 Designing a static treemap\n\n\n4.2 Using the basic arguments\n\n\n4.3 Working with vColor and type arguments\n\n\n4.4 Colours in treemap package\n\n\n4.5 The “value” type treemap\n\n\n4.6 The “manual” type treemap\n\n\n4.7 Treemap Layout\n\n\n4.8 Working with algorithm argument\n\n\n4.9 Using sortID"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-treemap-using-treemapify-package",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-treemap-using-treemapify-package",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "5 Designing Treemap using treemapify Package",
+    "text": "5 Designing Treemap using treemapify Package\n\n5.1 Designing a basic treemap\n\n\n5.2 Defining hierarchy"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-interactive-treemap-using-d3treer",
+    "href": "Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html#designing-interactive-treemap-using-d3treer",
+    "title": "Hands-on Exercise 9e: Treemap Visualisation with R",
+    "section": "6 Designing Interactive Treemap using d3treeR",
+    "text": "6 Designing Interactive Treemap using d3treeR\n\n6.1 Installing d3treeR package\n\n\n6.2 Designing An Interactive Treemap"
   }
 ]
