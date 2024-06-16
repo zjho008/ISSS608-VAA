@@ -1,0 +1,75 @@
+---
+title: "Hands-on Exercise 10: Information Dashboard Design (R methods)"
+author: "Ho Zi Jun"
+date: "June 22, 2024"
+date-modified: "last-modified"
+format: 
+  html:
+    number-sections: true
+    code-fold: false
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  message: false
+editor: source
+---
+
+## Overview
+
+By the end of this hands-on exercise, we will be able to:
+
+-   create bullet chart by using ggplot2,
+-   create sparklines by using ggplot2 ,
+-   build industry standard dashboard by using R Shiny.
+
+## Getting Started
+
+## Importing Microsoft Access database
+
+### The data set
+
+### Importing database into R
+
+### Data Preparation
+
+### Bullet chart in ggplot2
+
+## Plotting sparklines using ggplot2
+
+### Preparing the data
+
+### sparklines in ggplot2
+
+## Static Information Dashboard Design: gt and gtExtras methods
+
+### Plotting a simple bullet chart
+
+## sparklines: gtExtras method
+
+### Plotting Coffechain Sales report
+
+### Adding statistics
+
+### Combining the data.frame
+
+### Plotting the updated data.table
+
+### Combining bullet chart and sparklines
+
+## Interactive Information Dashboard Design: reactable and reactablefmtr methods
+
+### Plotting interactive sparklines
+
+### Changing the pagesize
+
+### Adding points and labels
+
+### Adding reference line
+
+### Adding bandline
+
+### Changing from sparkline to sparkbar
+
+## Reference
