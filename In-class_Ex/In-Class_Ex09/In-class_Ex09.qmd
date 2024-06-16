@@ -1,0 +1,132 @@
+---
+title: "In-class Exercise 09"
+author: "Ho Zi Jun"
+date: "June 15, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+  format: html
+editor: source
+---
+
+## Creating an interactive scatterplot with `scatterPlotMatrix()`
+
+## Loading and Installing the R Packages
+
+```{r}
+pacman::p_load(scatterPlotMatrix,
+parallelPlot, cluster, factoextra,
+tidyverse)
+```
+
+
+## Loading the data (Wine_quality dataset)
+
+```{r}
+wine <- read_csv("data/wine_quality.csv")
+```
+
+
+## EDA
+
+```{r}
+ggplot(data = wine,
+       aes(x = type)) +
+  geom_bar()
+```
+
+## Filtering out white wine
+
+```{r}
+whitewine <- wine %>%
+  filter(type == "white") %>%
+  select(c(1:11))  # Dropped last 2 variables: quality of wine and wine type - to tidy up data.frame
+```
+
+## Forming Interactive Scatter Plot Matrix
+
+```{r}
+scatterPlotMatrix(whitewine,
+                  corrPlotType = "Text",
+                  distribType = 1,
+                  rotateTitle = TRUE,
+                  width = 500, # when using this function/library (html widgets) the widget is a container by itself hence stating the width and height to define the container itself. (Display pixel)
+                  height = 500)
+```
+
+Hovering to a point in the scatter plot we can see the corresponding data for other variables. It is helpful in the sense that if there are multiple outliers, it can help us detect anomalies.
+
+Explanation of functions and usage:
+
+`corrPlotType` - Controls the type of correlation plots to use (4 types: Circles, Text, AbsText, Empty)
+
+`distribType` - Binary code indicating the type of distribution plot (bit 1: density plot, bit 2:
+histogram)
+
+`continousCS` - For various colour schemes
+
+[https://cran.r-project.org/web/packages/scatterPlotMatrix/scatterPlotMatrix.pdf](https://cran.r-project.org/web/packages/scatterPlotMatrix/scatterPlotMatrix.pdf)
+
+Note:
+
+If axis titles are overlapping we can also use use `rotateTitle`
+
+## Computing cluster analysis (to dervie clusters)
+
+```{r}
+# fviz_gap_stat()# code used to determine optimal clusters
+```
+
+
+```{r}
+set.seed(123) # seed value requried to make sure it is reproducible 
+kmeans4 <- kmeans(whitewine, 4, nstart = 25) # nstart = 25, typical clustering algorithim 
+print(kmeans4)
+```
+
+
+```{r}
+# fviz_cluster(kmeans4, data = whitewine)
+```
+
+```{r}
+whitewine <- whitewine %>%
+  mutate(Cluster = kmeans4$cluster) # new field created in whitewine, taken from kmeans4: cluster variable
+```
+
+```{r}
+whitewine$Cluster <-
+as_factor(whitewine$Cluster) # initially cluster value is interger (continous variable) convert it to obejct class factor. (Cluster of 1,2,3 etc)
+```
+
+```{r}
+whitewine %>%
+  parallelPlot(refColumnDim = "Cluster",
+               width = 300,
+               height = 250,
+               rotateTitle = TRUE)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+
+
+
+```{r}
+
+```

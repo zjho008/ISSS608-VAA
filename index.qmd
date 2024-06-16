@@ -20,14 +20,14 @@ about:
       href: https://public.tableau.com/app/profile/zi.jun.ho/vizzes
 listing:
   type: grid
-  max-items: 6
-  table-hover: true
-  max-description-length: 150
+  max-items: 24
+  page-size: 6
+  grid-item-align: center
+  max-description-length: 130
   contents:
     - "In-class_Ex/*/*.qmd"
     - "Hands-on_Ex/*/*.qmd"
     - "Take-home_Ex/*/*.qmd"
-    - "Projects"
   sort: 
     - "date desc"
 ---
@@ -36,4 +36,4 @@ Hey there! Welcome to my **Visual Analytics and Applications** page which docume
 
 From here, you can see how I utilise various data analytics methods to interact with data and explore relationships where I try to "[*detect the expected and discover the unexpected*]{.underline}".
 
-#### **A Feature of My Latest Works:**
+**A Feature of My Latest Works:**

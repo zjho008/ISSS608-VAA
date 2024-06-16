@@ -65,6 +65,8 @@ website:
             href: "In-Class_Ex/In-class_Ex07/In-class_Ex07.html"
           - text: "In-class Exercise 8"
             href: "In-Class_Ex/In-class_Ex08/In-class_Ex08.html"
+          - text: "In-class Exercise 9"
+            href: "In-Class_Ex/In-class_Ex09/In-class_Ex09.html"
       - text: "Take-home Exercise"
         menu: 
           - text: "Take-home Exercise 1"
@@ -93,7 +95,8 @@ format:
     toc-title: Table of Contents
     toc-depth: 4
     grid: 
-      sidebar-width: 150px
+      sidebar-width: 200px
+      body-width: 850px
       margin-width: 300px
 
 editor: source
