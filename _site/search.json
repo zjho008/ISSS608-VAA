@@ -1677,14 +1677,14 @@
     "href": "Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html#getting-started",
     "title": "Hands-on Exercise 10: Information Dashboard Design (R methods)",
     "section": "2 Getting Started",
-    "text": "2 Getting Started"
+    "text": "2 Getting Started\nFor the purpose of this hands-on exercise, the following R packages will be used.\n\nR Packages\n\n\n\n\n\n\nPackages\nDescription\n\n\n\n\ntidyverse\nprovides a collection of functions for performing data science tasks such as importing, tidying, wrangling data and visualising data. It is not a single package but a collection of modern R packages including but not limited to readr, tidyr, dplyr, ggplot, tibble, stringr, forcats and purrr\n\n\nlubridate\nprovides functions to work with dates and times more efficiently\n\n\nggthemes\nis an extension of ggplot2. It provides additional themes beyond the basic themes of ggplot2\n\n\ngtExtras\nprovides some additional helper functions to assist in creating beautiful tables with gt, an R package specially designed for anyone looking to make wonderful-looking tables using the R programming language.\n\n\nreactable\nprovides functions to create interactive data tables for R, based on the React Table library and made with reactR\n\n\nreactablefmtr\nprovides various features to streamline and enhance the styling of interactive reactable tables with easy-to-use and highly-customizable functions and themes\n\n\n\n\npacman::p_load(lubridate, ggthemes, reactable,\n               reactablefmtr, gt, gtExtras, tidyverse)"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html#importing-microsoft-access-database",
     "href": "Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html#importing-microsoft-access-database",
     "title": "Hands-on Exercise 10: Information Dashboard Design (R methods)",
     "section": "3 Importing Microsoft Access database",
-    "text": "3 Importing Microsoft Access database\n\n3.1 The data set\n\n\n3.2 Importing database into R\n\n\n3.3 Data Preparation\n\n\n3.4 Bullet chart in ggplot2"
+    "text": "3 Importing Microsoft Access database\n\n3.1 The data set\nFor the purpose of this study, a personal database in Microsoft Access mdb format called Coffee Chain will be used.\n\n\n3.2 Importing database into R\nIn the code chunk below, odbcConnectAccess() of RODBC package is used used to import a database query table into R.\n\n\n3.3 Data Preparation\n\n\n3.4 Bullet chart in ggplot2"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html#plotting-sparklines-using-ggplot2",

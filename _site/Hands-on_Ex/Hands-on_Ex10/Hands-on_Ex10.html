@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -159,6 +193,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 9e</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
   </li>  
     </ul>
   </li>
@@ -357,14 +395,60 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="getting-started" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">2</span> Getting Started</h2>
+<p>For the purpose of this hands-on exercise, the following R packages will be used.</p>
+<table class="table-striped table-hover table">
+<caption>R Packages</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Packages</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.tidyverse.org/">tidyverse</a></td>
+<td style="text-align: left;">provides a collection of functions for performing data science tasks such as importing, tidying, wrangling data and visualising data. It is not a single package but a collection of modern R packages including but not limited to <a href="https://readr.tidyverse.org/">readr</a>, <a href="https://tidyr.tidyverse.org/">tidyr</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a>, <a href="https://ggplot2.tidyverse.org/">ggplot</a>, <a href="https://tibble.tidyverse.org/">tibble</a>, <a href="https://stringr.tidyverse.org/">stringr</a>, <a href="https://forcats.tidyverse.org/">forcats</a> and <a href="https://purrr.tidyverse.org/">purrr</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://lubridate.tidyverse.org/">lubridate</a></td>
+<td style="text-align: left;">provides functions to work with dates and times more efficiently</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://jrnold.github.io/ggthemes/">ggthemes</a></td>
+<td style="text-align: left;">is an extension of ggplot2. It provides additional <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/">themes</a> beyond the basic themes of ggplot2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://jthomasmock.github.io/gtExtras/index.html">gtExtras</a></td>
+<td style="text-align: left;">provides some additional helper functions to assist in creating beautiful tables with <a href="https://gt.rstudio.com/">gt</a>, an R package specially designed for anyone looking to make wonderful-looking tables using the R programming language.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://glin.github.io/reactable/index.html">reactable</a></td>
+<td style="text-align: left;">provides functions to create interactive data tables for R, based on the <a href="https://github.com/tanstack/table/tree/v7">React Table</a> library and made with <a href="https://github.com/react-R/reactR">reactR</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://kcuilla.github.io/reactablefmtr/index.html">reactablefmtr</a></td>
+<td style="text-align: left;">provides various features to streamline and enhance the styling of interactive reactable tables with easy-to-use and highly-customizable functions and themes</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(lubridate, ggthemes, reactable,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               reactablefmtr, gt, gtExtras, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="importing-microsoft-access-database" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="importing-microsoft-access-database"><span class="header-section-number">3</span> Importing Microsoft Access database</h2>
 <section id="the-data-set" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="the-data-set"><span class="header-section-number">3.1</span> The data set</h3>
+<p>For the purpose of this study, a personal database in Microsoft Access mdb format called <em>Coffee Chain</em> will be used.</p>
 </section>
 <section id="importing-database-into-r" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="importing-database-into-r"><span class="header-section-number">3.2</span> Importing database into R</h3>
+<p>In the code chunk below, <code>odbcConnectAccess()</code> of <a href="https://cran.r-project.org/web/packages/RODBC/index.html"><strong>RODBC</strong></a> package is used used to import a database query table into R.</p>
 </section>
 <section id="data-preparation" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.3</span> Data Preparation</h3>

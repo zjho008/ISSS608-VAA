@@ -26,11 +26,34 @@ By the end of this hands-on exercise, we will be able to:
 
 ## Getting Started
 
+For the purpose of this hands-on exercise, the following R packages will be used.
+
+| Packages                                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|:------------------------------|:----------------------------------------|
+| [tidyverse](https://www.tidyverse.org/)                             | provides a collection of functions for performing data science tasks such as importing, tidying, wrangling data and visualising data. It is not a single package but a collection of modern R packages including but not limited to [readr](https://readr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/), [dplyr](https://dplyr.tidyverse.org/), [ggplot](https://ggplot2.tidyverse.org/), [tibble](https://tibble.tidyverse.org/), [stringr](https://stringr.tidyverse.org/), [forcats](https://forcats.tidyverse.org/) and [purrr](https://purrr.tidyverse.org/) |
+| [lubridate](https://lubridate.tidyverse.org/)                       | provides functions to work with dates and times more efficiently                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [ggthemes](https://jrnold.github.io/ggthemes/)                      | is an extension of ggplot2. It provides additional [themes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/) beyond the basic themes of ggplot2                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [gtExtras](https://jthomasmock.github.io/gtExtras/index.html)       | provides some additional helper functions to assist in creating beautiful tables with [gt](https://gt.rstudio.com/), an R package specially designed for anyone looking to make wonderful-looking tables using the R programming language.                                                                                                                                                                                                                                                                                                                                 |
+| [reactable](https://glin.github.io/reactable/index.html)            | provides functions to create interactive data tables for R, based on the [React Table](https://github.com/tanstack/table/tree/v7) library and made with [reactR](https://github.com/react-R/reactR)                                                                                                                                                                                                                                                                                                                                                                        |
+| [reactablefmtr](https://kcuilla.github.io/reactablefmtr/index.html) | provides various features to streamline and enhance the styling of interactive reactable tables with easy-to-use and highly-customizable functions and themes                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+: R Packages {.striped .hover tbl-colwidths="\[25,75\]"}
+
+```{r}
+pacman::p_load(lubridate, ggthemes, reactable,
+               reactablefmtr, gt, gtExtras, tidyverse)
+```
+
 ## Importing Microsoft Access database
 
 ### The data set
 
+For the purpose of this study, a personal database in Microsoft Access mdb format called *Coffee Chain* will be used.
+
 ### Importing database into R
+
+In the code chunk below, `odbcConnectAccess()` of [**RODBC**](https://cran.r-project.org/web/packages/RODBC/index.html) package is used used to import a database query table into R.
+
 
 ### Data Preparation
 
