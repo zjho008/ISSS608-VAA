@@ -375,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">June 16, 2024</p>
+      <p class="date-modified">June 18, 2024</p>
     </div>
   </div>
     
@@ -449,25 +449,124 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="importing-database-into-r" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="importing-database-into-r"><span class="header-section-number">3.2</span> Importing database into R</h3>
 <p>In the code chunk below, <code>odbcConnectAccess()</code> of <a href="https://cran.r-project.org/web/packages/RODBC/index.html"><strong>RODBC</strong></a> package is used used to import a database query table into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(RODBC)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con &lt;- odbcConnectAccess2007('data/Coffee Chain.mdb')</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># coffeechain &lt;- sqlFetch(con, 'CoffeeChain Query')</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(coffeechain, "data/CoffeeChain.rds")</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># odbcClose(con)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note: Before running the code chunk, wer need to change the R system to 32bit version. This is because the <code>odbcConnectAccess()</code> is based on 32bit and not 64bit</p>
 </section>
 <section id="data-preparation" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.3</span> Data Preparation</h3>
+<p>The code chunk below is used to import <em>CoffeeChain.rds</em> into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>coffeechain <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rds/CoffeeChain.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note: This step is optional if <em>coffeechain</em> is already available in R.</p>
+<p>The code chunk below is used to aggregate Sales and Budgeted Sales at the Product level.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> coffeechain <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Product) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">target</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Budget Sales</span><span class="st">`</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">current</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Sales</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="bullet-chart-in-ggplot2" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="bullet-chart-in-ggplot2"><span class="header-section-number">3.4</span> Bullet chart in ggplot2</h3>
+<p>The code chunk below is used to plot a bullet chart using ggplot2 functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(product, <span class="fu">aes</span>(Product, current)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(Product, <span class="fu">max</span>(target) <span class="sc">*</span> <span class="fl">1.01</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"grey85"</span>, <span class="at">width =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(Product, target <span class="sc">*</span> <span class="fl">0.75</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"grey60"</span>, <span class="at">width =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(Product, target <span class="sc">*</span> <span class="fl">0.5</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill=</span>  <span class="st">"grey50"</span>, <span class="at">width =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(Product, current),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">width =</span> <span class="fl">0.35</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> target,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> Product,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymin =</span> target,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> target),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">4</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands-on_Ex10_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 <section id="plotting-sparklines-using-ggplot2" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="plotting-sparklines-using-ggplot2"><span class="header-section-number">4</span> Plotting sparklines using ggplot2</h2>
+<p>In this section, we will learn how to plot sparklines by using ggplot2.</p>
 <section id="preparing-the-data" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">4.1</span> Preparing the data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sales_report <span class="ot">&lt;-</span> coffeechain <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="st">"2013-01-01"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">month</span>(Date)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month, Product) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Sales =</span> <span class="fu">sum</span>(Sales)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Month, Product, Sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunk below is used to compute the minimum, maximum and end of the month sales.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mins <span class="ot">&lt;-</span> <span class="fu">group_by</span>(sales_report, Product) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which.min</span>(Sales))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>maxs <span class="ot">&lt;-</span> <span class="fu">group_by</span>(sales_report, Product) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which.max</span>(Sales))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ends <span class="ot">&lt;-</span> <span class="fu">group_by</span>(sales_report, Product) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Month <span class="sc">==</span> <span class="fu">max</span>(Month))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunk below is used to compute the 25 and 75 quantiles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>quarts <span class="ot">&lt;-</span> sales_report <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Product) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">quart1 =</span> <span class="fu">quantile</span>(Sales,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                              <span class="fl">0.25</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">quart2 =</span> <span class="fu">quantile</span>(Sales,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                              <span class="fl">0.75</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(sales_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="sparklines-in-ggplot2" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="sparklines-in-ggplot2"><span class="header-section-number">4.2</span> sparklines in ggplot2</h3>
+<p>The code chunk below is used tp plot sparklines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sales_report, <span class="fu">aes</span>(<span class="at">x =</span> Month, <span class="at">y =</span> Sales)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Product <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> quarts, <span class="fu">aes</span>(<span class="at">ymin =</span> quart1, <span class="at">max =</span> quart2),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">'grey90'</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> mins, <span class="at">col =</span> <span class="st">'red'</span>)<span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> maxs, <span class="at">col =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> mins, <span class="fu">aes</span>(<span class="at">label =</span> Sales), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> maxs, <span class="fu">aes</span>(<span class="at">label =</span> Sales), <span class="at">vjust =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> ends, <span class="fu">aes</span>(<span class="at">label =</span> Sales), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">nudge_x =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> ends, <span class="fu">aes</span>(<span class="at">label =</span> Product), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">nudge_x =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">max</span>(sales_report<span class="sc">$</span>Month) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                  (<span class="fl">0.25</span> <span class="sc">*</span> (<span class="fu">max</span>(sales_report<span class="sc">$</span>Month) <span class="sc">-</span> <span class="fu">min</span>(sales_report<span class="sc">$</span>Month)))) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>(<span class="at">base_size =</span> <span class="dv">3</span>, <span class="at">base_family =</span> <span class="st">"Helvetica"</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(), <span class="at">strip.text =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands-on_Ex10_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
 </section>
 </section>
 <section id="static-information-dashboard-design-gt-and-gtextras-methods" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="static-information-dashboard-design-gt-and-gtextras-methods"><span class="header-section-number">5</span> Static Information Dashboard Design: gt and gtExtras methods</h2>
+<p>In this section, we will learn how to create static information dashboard by using <a href="https://gt.rstudio.com/index.html">gt</a> and <a href="https://jthomasmock.github.io/gtExtras/index.html">gtExtras</a> packages. Before getting started, it is highly recommended to visit the webpage of these two packages and review all the materials provided on the webpages at least once. We do not have to understand and remember everything provided but at least have an overview of the purposes and functions provided by them.</p>
 <section id="plotting-a-simple-bullet-chart" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="plotting-a-simple-bullet-chart"><span class="header-section-number">5.1</span> Plotting a simple bullet chart</h3>
 </section>
