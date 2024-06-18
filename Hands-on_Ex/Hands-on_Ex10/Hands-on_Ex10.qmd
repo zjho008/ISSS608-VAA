@@ -181,30 +181,287 @@ In this section, we will learn how to create static information dashboard by usi
 
 ### Plotting a simple bullet chart
 
+In this section, we will learn how to prepare a bullet chart report by using functions of gt and gtExtras packages.
+
+```{r}
+product %>%
+  gt::gt() %>%
+  gt_plt_bullet(column = current, 
+              target = target, 
+              width = 60,
+              palette = c("lightblue", 
+                          "black")) %>%
+  gt_theme_538()
+```
+
 ## sparklines: gtExtras method
+
+Before we can prepare the sales report by product by using gtExtras functions, the code chunk below will be used to prepare the data.
+
+```{r}
+report <- coffeechain %>%
+  mutate(Year = year(Date)) %>%
+  filter(Year == "2013") %>%
+  mutate(Month = month(Date,
+                       label = TRUE,
+                       abbr = TRUE)) %>%
+  group_by(Product, Month) %>%
+  summarise(Sales = sum(Sales)) %>%
+  ungroup()
+```
+
+::: callout-note
+It is important to note that one of the requirement of gtExtras functions is that almost exclusively it requires the data.frame to be pass with list columns. In view of this, code chunk below will be used to convert the report data.frame into list columns.
+:::
+
+```{r}
+report %>%
+  group_by(Product) %>%
+  summarise('Monthly Sales' = list(Sales),
+            .group = "drop")
+```
 
 ### Plotting Coffechain Sales report
 
+```{r}
+report %>%
+  group_by(Product) %>%
+  summarise('Monthly Sales' = list(Sales),
+            .groups = "drop") %>%
+  gt() %>%
+  gt_plt_sparkline('Monthly Sales',
+                   same_limit = FALSE)
+```
+
 ### Adding statistics
+
+First, calculate summary statistics by using the code chunk below.
+
+```{r}
+report %>%
+  group_by(Product) %>%
+  summarise("Min" = min(Sales, na.rm = T),
+            "Max" = max(Sales, na.rm = T),
+            "Average" = mean(Sales, na.rm = T)
+            ) %>%
+  gt() %>%
+  fmt_number(columns = 4,
+             decimals = 2)
+```
 
 ### Combining the data.frame
 
+Next, use the code chunk below to add the statistics on the table.
+
+```{r}
+spark <- report %>%
+  group_by(Product) %>%
+  summarise('Monthly Sales' = list(Sales),
+            .groups = "drop")
+```
+
+```{r}
+sales <- report %>%
+  group_by(Product) %>%
+  summarise("Min" = min(Sales, na.rm = T),
+            "Max" = max(Sales, na.rm = T),
+            "Average" = mean(Sales, na.rm = T)
+            )
+```
+
+```{r}
+sales_data = left_join(sales, spark)
+```
+
 ### Plotting the updated data.table
+
+```{r}
+sales_data %>%
+  gt() %>%
+  gt_plt_sparkline('Monthly Sales',
+                   same_limit = FALSE)
+```
 
 ### Combining bullet chart and sparklines
 
+Similarly, we can combine the bullet chart and sparklines using the code chunks below.
+
+```{r}
+bullet <- coffeechain %>%
+  filter(Date >= "2013-01-01") %>%
+  group_by(`Product`) %>%
+  summarise(`Target` = sum(`Budget Sales`),
+            `Actual` = sum(`Sales`)) %>%
+  ungroup()
+```
+
+```{r}
+sales_data = sales_data %>%
+  left_join(bullet)
+```
+
+```{r}
+sales_data %>%
+  gt() %>%
+  gt_plt_sparkline('Monthly Sales') %>%
+  gt_plt_bullet(column = Actual,
+                target = Target,
+                width = 28,
+                palette = c("lightblue",
+                            "black")) %>%
+  gt_theme_538()
+```
+
 ## Interactive Information Dashboard Design: reactable and reactablefmtr methods
+
+In this section, we will learn how to create interactive information dashboard by using [reactable](https://glin.github.io/reactable/index.html) and [reactablefmtr](https://kcuilla.github.io/reactablefmtr/index.html) packages. Before getting started, it is highly recommended to visit the webpage of these two packages and review all the materials provided on the webpages at least once. We do not have to understand and remember everything provided but at least have an overview of the purposes and functions provided by them.
+
+In order to build an interactive sparklines, we need to install dataui R package by using the code chunk below.
+
+```{r}
+remotes::install_github("timelyportfolio/dataui")
+```
+
+Next, is to load the package onto R environment by using the code chunk below.
+
+```{r}
+library(dataui)
+```
 
 ### Plotting interactive sparklines
 
+Similar to gtExtras, to plot an interactive sparklines by using reactablefmtr package we need to prepare the list field by using the code chunk below.
+
+```{r}
+report <- report %>%
+  group_by(Product) %>%
+  summarise(`Monthly Sales` = list(Sales))
+```
+
+Next, [react_sparkline](https://kcuilla.github.io/reactablefmtr/reference/react_sparkline.html) will be used to plot the sparklines as shown below.
+
+```{r}
+reactable(
+  report,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(report)
+    )
+  )
+)
+```
+
 ### Changing the pagesize
+
+By default the page size is 10. In the code chunk below, arguments defaultPageSize is used to change the default setting.
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(report)
+    )
+  )
+)
+```
 
 ### Adding points and labels
 
+In the code chunk below `highlight_points` argument is used to show the minimum and maximum values points and `label` argument is used to label first and last values.
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(
+        report,
+        highlight_points = highlight_points(
+          min = "red", max = "blue"),
+        labels = c("first", "last")
+        )
+    )
+  )
+)
+```
+
 ### Adding reference line
+
+In the code chunk below `statline` argument is used to show the mean line.
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(
+        report,
+        highlight_points = highlight_points(
+          min = "red", max = "blue"),
+        labels = c("first", "last"),
+        statline = "mean"
+        )
+    )
+  )
+)
+```
 
 ### Adding bandline
 
+Instead of adding a reference line, bandline can be added by using the `bandline` argument.
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(
+        report,
+        highlight_points = highlight_points(
+          min = "red", max = "blue"),
+        labels = c("first", "last"),
+        line_width = 1,
+        bandline = "innerquartiles",
+        bandline_color = "green"
+        )
+    )
+  )
+)
+```
+
 ### Changing from sparkline to sparkbar
 
+Instead of displaying the values as sparklines, we can display them as sparkbars as shown below.
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkbar(
+        report,
+        highlight_bars = highlight_bars(
+          min = "red", max = "blue"),
+        labels = c("first", "last"),
+        bandline = "innerquartiles",
+        statline = "mean")
+    )
+  )
+)
+```
+
 ## Reference
+
+Kam, T. S. (2024). [Information Dashboard Design: R methods](https://r4va.netlify.app/chap31)
