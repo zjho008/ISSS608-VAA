@@ -1,0 +1,17 @@
+{
+  "hash": "483bf6e021cd8e042af443696b34b0fb",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class Exercise 10a: Dashboard Design Using Quarto\"\nformat: \n  dashboard:\n    orientation: columns\ndate: \"June 22, 2024\"\ndate-modified: \"last-modified\"\nexecute:\n  eval: true\n  echo: false\n  warning: false\n  freeze: true\n---\n\n\n## Loading the R Package\n\n\n::: {.cell}\n\n:::\n\n\n## Loading the Data\n\n\n::: {.cell}\n\n:::\n\n\n## Product Sales\n\n\n::: {.cell}\n\n:::\n\n\n## Product Profit\n\n\n::: {.cell}\n\n:::\n\n\n## Column {width = 50%}\n\n\n::: {.cell title='Sales by Products'}\n::: {.cell-output-display}\n![](In-class_Ex10a_files/figure-html/unnamed-chunk-5-1.png){width=768}\n:::\n:::\n\n\n## Column {width = 50%}\n\n\n::: {.cell title='Profit by Products'}\n::: {.cell-output-display}\n![](In-class_Ex10a_files/figure-html/unnamed-chunk-6-1.png){width=768}\n:::\n:::\n",
+    "supporting": [
+      "In-class_Ex10a_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

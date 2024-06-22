@@ -1,0 +1,15 @@
+---
+title: "In-class Exercise 10"
+author: "Ho Zi Jun"
+date: "June 22, 2024"
+date-modified: "last-modified"
+execute:
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Link to Tableau Visualisation:
+
+[Coffee Chain Dashboard](https://public.tableau.com/app/profile/zi.jun.ho/viz/CoffeeChainDashboard_17190373379550/CoffeChainDashboard?publish=yes)
